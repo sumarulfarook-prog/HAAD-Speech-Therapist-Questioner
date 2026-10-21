@@ -227,7 +227,6 @@ const QUESTION_BANK = [
     answer:1,
     explanation:"Evaluation of bilingual children should account for language exposure and use, assess abilities across languages where possible, and draw on multiple sources of evidence. Bilingualism itself does not cause a language disorder."
   }
-];
 
 
      // ===== EASY: ST031–ST050 =====
