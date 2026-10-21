@@ -306,8 +306,7 @@ const QUESTION_BANK = [
     options: ["Tongue tip and alveolar ridge", "Lower lip and upper teeth", "Both lips", "Tongue dorsum and soft palate"],
     answer: 2,
     explanation: "Bilabial sounds are produced using both lips. Examples include /p/, /b/, and /m/ in English."
-  }
-];
+  },
   {
     id:"ST033",difficulty:"Easy",topic:"Language Development",
     question:"Which behaviour is an example of expressive language?",
