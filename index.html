@@ -3,397 +3,569 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#123b59">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f2ff">
 <title>Speech Therapist Exam Practice</title>
 <style>
-:root{--blue:#123b59;--pale:#eef5fa;--green:#197548;--red:#b42318}
+:root {
+  --ink:#24213a; --muted:#716e85; --purple:#6b4eff;
+  --purple-dark:#4e35d1; --bg:#f7f6fc; --card:#fff;
+  --line:#e9e5f3; --green:#16865c; --red:#c94a58;
+  --shadow:0 10px 35px rgba(42,31,91,.08);
+}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6fa;color:#172b3a;line-height:1.5}
-header{background:var(--blue);color:white;padding:24px 15px;text-align:center}
-header h1{margin:0;font-size:clamp(23px,5vw,32px)}
-header p{margin:7px 0 0;color:#e1edf5}
-main{max-width:850px;margin:auto;padding:14px}
-.panel{background:white;padding:18px;border-radius:14px;margin:14px 0;box-shadow:0 2px 10px #102f4510}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.stat{text-align:center;background:var(--pale);padding:12px 4px;border-radius:10px}
-.stat strong{display:block;font-size:24px;color:var(--blue)}
-label{display:block;font-weight:bold;margin:13px 0 5px}
-select,button{font:inherit;padding:11px;border-radius:9px}
-select{width:100%;border:1px solid #bbc9d4;background:white}
-button{border:0;cursor:pointer;background:var(--blue);color:white;font-weight:bold}
-button:disabled{opacity:.45;cursor:not-allowed}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.actions button{flex:1}
-.secondary{background:#e5edf4;color:var(--blue)}
-.option{display:block;width:100%;text-align:left;margin:9px 0;background:#f5f8fb;color:#17354a;border:2px solid #d9e3eb;font-weight:normal}
-.option:hover:not(:disabled){border-color:#648da9}
-.option.correct{background:#e0f5e8;border-color:#248650;color:#145c36}
-.option.wrong{background:#fde8e7;border-color:#c43d35;color:#8d211b}
-#feedback{padding:12px;border-radius:9px;margin-top:12px}
-.good{background:#e0f5e8;color:#145c36}
-.bad{background:#fde8e7;color:#8d211b}
-.muted{color:#5d6e7a;font-size:14px}
-.progress{height:8px;background:#e2eaf0;border-radius:10px;overflow:hidden}
-#progressBar{height:100%;width:0;background:#23865a}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+button,select,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible{
+  outline:3px solid #b6a9ff;outline-offset:2px}
+header{background:linear-gradient(120deg,#392b83,#7958ff);
+  color:#fff;padding:23px 20px 32px}
+.header-inner,.wrap{max-width:1120px;margin:auto}
+.brand{font-size:13px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;opacity:.85}
+h1{font-size:clamp(27px,4vw,40px);line-height:1.12;margin:9px 0}
+header p{margin:10px 0 0;opacity:.9;max-width:660px}
+.wrap{padding:22px 18px 48px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  margin-top:-12px;position:relative}
+.stat,.panel,.cat-panel{background:var(--card);border:1px solid var(--line);
+  border-radius:18px;box-shadow:var(--shadow)}
+.stat{padding:15px 17px}
+.stat small{color:var(--muted);display:block;font-size:12px;font-weight:700}
+.stat strong{display:block;font-size:25px;margin-top:2px}
+.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.8fr);
+  gap:18px;margin-top:20px;align-items:start}
+.panel{padding:22px;margin-bottom:18px}
+h2{font-size:20px;margin:0 0 14px}
+h3{font-size:16px;margin:0 0 8px}
+.muted{color:var(--muted)}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field label{display:block;font-size:12px;font-weight:800;color:var(--muted);
+  margin-bottom:6px}
+select,input{width:100%;padding:11px 12px;border:1px solid var(--line);
+  background:#fff;border-radius:10px;color:var(--ink)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:11px 16px;font-weight:800}
+.primary{background:var(--purple);color:#fff}
+.primary:hover{background:var(--purple-dark)}
+.secondary{background:#f0edff;color:#4c36bf}
+.outline{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.progress-track{height:9px;border-radius:20px;background:#eeeaf7;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#7255ff,#ad8bff);
+  transition:width .3s}
+.quiz-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-size:13px;font-weight:800;color:var(--muted);margin-bottom:12px}
+.question{font-size:20px;font-weight:750;line-height:1.45;margin:20px 0}
+.options{display:grid;gap:10px}
+.option{display:flex;gap:12px;align-items:flex-start;text-align:left;
+  width:100%;padding:14px;border:1px solid var(--line);border-radius:13px;
+  background:#fff;color:var(--ink);transition:.16s}
+.option:hover:not(:disabled){border-color:#b4a5ff;background:#faf8ff}
+.option-letter{flex:0 0 29px;height:29px;border-radius:9px;
+  display:grid;place-items:center;background:#f0edff;color:#5942d0;font-weight:900}
+.option.correct{border-color:#65c7a0;background:#effbf5}
+.option.correct .option-letter{background:#c9f2df;color:#116a48}
+.option.wrong{border-color:#ee9ba4;background:#fff3f4}
+.option.wrong .option-letter{background:#ffdce0;color:#9d2734}
+.feedback{display:none;border-radius:13px;padding:15px;margin-top:14px}
+.feedback.show{display:block}
+.feedback.good{background:#edfbf4;border:1px solid #bdebd3}
+.feedback.bad{background:#fff1f2;border:1px solid #f4c4ca}
+.feedback strong{display:block;margin-bottom:5px}
+.quiz-actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.cat-panel{padding:16px;margin-bottom:18px;overflow:hidden}
+.cat-stage{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:end}
+.cat{text-align:center;min-width:0}
+.cat svg{width:100%;max-width:180px;height:auto;overflow:visible}
+.cat-name{font-weight:900;font-size:13px}
+.cat-caption{font-size:12px;color:var(--muted);min-height:36px}
+.cat svg .arm{transform-origin:132px 104px}
+#owner.feed .arm{animation:feed .75s ease-in-out}
+#student.happy{animation:happy .65s ease-in-out}
+#student.bonk{animation:bonk .55s ease-in-out}
+.treat{opacity:0}
+#owner.feed .treat{animation:treat .75s ease-in-out}
+.stars{opacity:0}
+#student.bonk .stars{animation:stars .65s ease-out}
+@keyframes feed{0%,100%{transform:rotate(0)}45%{transform:rotate(-48deg)}}
+@keyframes treat{0%{opacity:0;transform:translate(0,0)}35%{opacity:1}
+  100%{opacity:0;transform:translate(-48px,18px)}}
+@keyframes happy{0%,100%{transform:translateY(0)}30%,70%{transform:translateY(-12px)}}
+@keyframes bonk{0%,100%{transform:rotate(0) translateX(0)}
+  25%{transform:rotate(-7deg) translateX(-5px)}
+  50%{transform:rotate(7deg) translateX(5px)}}
+@keyframes stars{0%{opacity:0;transform:scale(.3) rotate(0)}
+  35%{opacity:1;transform:scale(1.2) rotate(20deg)}100%{opacity:0;transform:scale(.7) rotate(70deg)}}
 .hidden{display:none!important}
-footer{text-align:center;color:#637381;padding:22px;font-size:13px}
+.topic-list{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.pill{border-radius:30px;background:#f0edff;color:#5740c5;padding:6px 10px;
+  font-size:12px;font-weight:800}
+.review-item{padding:14px 0;border-bottom:1px solid var(--line)}
+.review-item:last-child{border-bottom:0}
+.review-item p{margin:6px 0}
+.notice{font-size:13px;color:var(--muted);margin-top:12px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:760px){
+ .layout{grid-template-columns:1fr}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .panel{padding:17px}
+ .question{font-size:18px}
+}
+@media(max-width:420px){.controls{grid-template-columns:1fr}.wrap{padding:17px 12px 35px}}
 </style>
 </head>
 <body>
 <header>
-<h1>Speech Therapist Exam Practice</h1>
-<p>100 original HAAD / DOH-style preparation questions</p>
+  <div class="header-inner">
+    <div class="brand">Clinical learning • Practice • Improve</div>
+    <h1>Speech Therapist Exam Practice</h1>
+    <p>Build confidence with structured MCQs, clinical explanations, exam simulations and a little encouragement from your feline study companions.</p>
+  </div>
 </header>
 
-<main>
-<section class="panel">
-<h2>Your progress</h2>
-<div class="stats">
-<div class="stat"><strong id="attempted">0</strong>Answered</div>
-<div class="stat"><strong id="correctCount">0</strong>Correct</div>
-<div class="stat"><strong id="accuracy">0%</strong>Accuracy</div>
-</div>
-<p class="muted">Progress is saved in this browser on this device.</p>
-<div class="progress"><div id="progressBar"></div></div>
+<main class="wrap">
+  <section class="stats" aria-label="Your progress">
+    <div class="stat"><small>QUESTIONS ANSWERED</small><strong id="answeredStat">0</strong></div>
+    <div class="stat"><small>CORRECT ANSWERS</small><strong id="correctStat">0</strong></div>
+    <div class="stat"><small>ACCURACY</small><strong id="accuracyStat">0%</strong></div>
+    <div class="stat"><small>REVIEW ITEMS</small><strong id="reviewStat">0</strong></div>
+  </section>
 
-<label for="topic">Choose a topic</label>
-<select id="topic">
-<option value="All">All topics</option>
-<option>Anatomy & Physiology</option>
-<option>Language Development</option>
-<option>Speech Sound Disorders</option>
-<option>Aphasia & Motor Speech</option>
-<option>Fluency, Voice & Resonance</option>
-<option>Autism & AAC</option>
-<option>Dysphagia & Feeding</option>
-<option>Hearing & Early Intervention</option>
-<option>Evidence-Based Practice</option>
-<option>Ethics & Clinical Practice</option>
-</select>
-<div class="actions">
-<button id="start">Start Practice</button>
-<button id="review" class="secondary">Review Incorrect</button>
-<button id="mock" class="secondary">Mock Test (20)</button>
-<button id="reset" class="secondary">Reset Progress</button>
-</div>
-</section>
+  <div class="layout">
+    <div>
+      <section class="panel" id="setupPanel">
+        <h2>Set up your practice</h2>
+        <div class="controls">
+          <div class="field"><label for="difficulty">DIFFICULTY</label>
+            <select id="difficulty">
+              <option value="All">All difficulties</option>
+              <option value="Easy">Easy</option>
+              <option value="Moderate">Moderate</option>
+              <option value="Hard">Hard</option>
+            </select>
+          </div>
+          <div class="field"><label for="topic">TOPIC</label>
+            <select id="topic"><option value="All">All topics</option></select>
+          </div>
+          <div class="field"><label for="sessionLength">SESSION LENGTH</label>
+            <select id="sessionLength">
+              <option value="10">10 questions</option>
+              <option value="25" selected>25 questions</option>
+              <option value="50">50 questions</option>
+              <option value="100">100 questions</option>
+              <option value="all">All matching questions</option>
+            </select>
+          </div>
+          <div class="field"><label for="mode">MODE</label>
+            <select id="mode">
+              <option value="practice">Practice with explanations</option>
+              <option value="exam">Mock exam — feedback at the end</option>
+              <option value="review">Review incorrect answers</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="startBtn">Start practice</button>
+          <button class="btn secondary" id="resumeBtn">Resume session</button>
+          <button class="btn outline" id="resetProgressBtn">Reset progress</button>
+        </div>
+        <p class="notice" id="bankNotice">Loading question bank…</p>
+        <div class="topic-list">
+          <span class="pill">4 options per question</span>
+          <span class="pill">Explanations</span>
+          <span class="pill">Mistake review</span>
+        </div>
+      </section>
 
-<section class="panel" id="quiz">
-<p class="muted" id="position">Loading questions...</p>
-<h2 id="question"></h2>
-<div id="options"></div>
-<div id="feedback" class="hidden"></div>
-<div class="actions">
-<button id="previous" class="secondary">Previous</button>
-<button id="next">Next Question</button>
-</div>
-</section>
+      <section class="panel hidden" id="quizPanel">
+        <div class="quiz-top">
+          <span id="questionCount">Question 1</span>
+          <span id="quizModeLabel">Practice mode</span>
+          <span id="timerLabel" class="hidden">00:00</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="sessionProgress"></div></div>
+        <div class="question" id="questionText"></div>
+        <div class="options" id="options"></div>
+        <div class="feedback" id="feedback" aria-live="polite"></div>
+        <div class="quiz-actions">
+          <button class="btn outline" id="quitBtn">End session</button>
+          <button class="btn primary" id="nextBtn" disabled>Next question →</button>
+        </div>
+      </section>
 
-<section class="panel hidden" id="results">
-<h2>Test complete</h2>
-<p id="resultText"></p>
-<div class="actions">
-<button id="again">Try Again</button>
-<button id="backToPractice" class="secondary">All Questions</button>
-</div>
-</section>
+      <section class="panel hidden" id="resultPanel">
+        <h2 id="resultTitle">Session complete</h2>
+        <p id="resultSummary"></p>
+        <div class="progress-track"><div class="progress-fill" id="resultProgress"></div></div>
+        <div class="actions">
+          <button class="btn primary" id="againBtn">Practice again</button>
+          <button class="btn secondary" id="reviewBtn">Review mistakes</button>
+          <button class="btn outline" id="backSetupBtn">Back to setup</button>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="reviewPanel">
+        <h2>Review incorrect answers</h2>
+        <p class="muted" id="reviewSummary"></p>
+        <div id="reviewList"></div>
+        <div class="actions"><button class="btn primary" id="practiceMistakesBtn">Practise these questions</button>
+          <button class="btn outline" id="closeReviewBtn">Back to setup</button></div>
+      </section>
+    </div>
+
+    <aside>
+      <section class="cat-panel">
+        <h2>Study buddies</h2>
+        <div class="cat-stage">
+          <div class="cat" id="owner">
+            <svg viewBox="0 0 180 190" role="img" aria-label="Milo the cat, who gives treats">
+              <ellipse cx="90" cy="174" rx="51" ry="8" fill="#e8e2f5"/>
+              <path d="M48 84 L38 28 L78 53 Q91 47 104 53 L143 28 L132 86 Q151 111 140 143 Q126 168 90 166 Q53 168 40 143 Q29 112 48 84Z" fill="#f1a65b" stroke="#7b4a28" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M49 42 L68 60 L47 76Z M132 42 L113 60 L134 76Z" fill="#f7c7cc"/>
+              <path d="M53 91 Q67 79 79 91 M101 91 Q114 79 128 91" fill="none" stroke="#7b4a28" stroke-width="4" stroke-linecap="round"/>
+              <ellipse cx="67" cy="100" rx="5" ry="7" fill="#32263b"/><ellipse cx="113" cy="100" rx="5" ry="7" fill="#32263b"/>
+              <path d="M85 113 Q90 119 95 113 Q90 107 85 113Z" fill="#ce6577"/>
+              <path d="M90 119 Q85 129 77 124 M90 119 Q95 129 103 124" fill="none" stroke="#7b4a28" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M54 117 L23 111 M54 124 L23 127 M126 117 L157 111 M126 124 L157 127" stroke="#7b4a28" stroke-width="2" stroke-linecap="round"/>
+              <path d="M54 143 Q90 158 126 143" fill="none" stroke="#7b4a28" stroke-width="3"/>
+              <path class="arm" d="M125 130 Q144 133 143 112 L151 88" fill="none" stroke="#f1a65b" stroke-width="14" stroke-linecap="round"/>
+              <circle cx="151" cy="85" r="8" fill="#f1a65b" stroke="#7b4a28" stroke-width="2"/>
+              <g class="treat"><circle cx="145" cy="83" r="8" fill="#f2cf43" stroke="#9b6e1b" stroke-width="2"/><path d="M141 83 L149 83 M145 79 L145 87" stroke="#9b6e1b" stroke-width="2"/></g>
+              <path d="M73 148 Q90 158 107 148" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+              <path d="M68 67 Q77 74 83 67 M98 67 Q104 74 112 67" stroke="#d47d37" stroke-width="3" fill="none"/>
+            </svg>
+            <div class="cat-name">Milo</div><div class="cat-caption">The treat-giving coach</div>
+          </div>
+          <div class="cat" id="student">
+            <svg viewBox="0 0 180 190" role="img" aria-label="Luna the student cat">
+              <ellipse cx="90" cy="174" rx="51" ry="8" fill="#e8e2f5"/>
+              <path d="M48 84 L38 28 L78 53 Q91 47 104 53 L143 28 L132 86 Q151 111 140 143 Q126 168 90 166 Q53 168 40 143 Q29 112 48 84Z" fill="#b7a4f4" stroke="#5944a0" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M49 42 L68 60 L47 76Z M132 42 L113 60 L134 76Z" fill="#f7c7cc"/>
+              <path d="M53 91 Q67 79 79 91 M101 91 Q114 79 128 91" fill="none" stroke="#5944a0" stroke-width="4" stroke-linecap="round"/>
+              <ellipse cx="67" cy="100" rx="5" ry="7" fill="#32263b"/><ellipse cx="113" cy="100" rx="5" ry="7" fill="#32263b"/>
+              <path d="M85 113 Q90 119 95 113 Q90 107 85 113Z" fill="#ce6577"/>
+              <path d="M90 119 Q85 129 77 124 M90 119 Q95 129 103 124" fill="none" stroke="#5944a0" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M54 117 L23 111 M54 124 L23 127 M126 117 L157 111 M126 124 L157 127" stroke="#5944a0" stroke-width="2" stroke-linecap="round"/>
+              <path d="M54 143 Q90 158 126 143" fill="none" stroke="#5944a0" stroke-width="3"/>
+              <path d="M67 66 Q77 75 83 67 M98 67 Q104 75 112 66" stroke="#8772d6" stroke-width="3" fill="none"/>
+              <g class="stars" fill="#f4c542" stroke="#b58313" stroke-width="1.5">
+                <path d="M35 66 L40 78 L53 79 L43 87 L46 100 L35 93 L24 100 L27 87 L17 79 L30 78Z"/>
+                <path d="M145 60 L149 69 L159 70 L151 77 L153 87 L145 82 L137 87 L139 77 L131 70 L141 69Z"/>
+                <path d="M90 30 L94 39 L104 40 L96 47 L98 57 L90 52 L82 57 L84 47 L76 40 L86 39Z"/>
+              </g>
+            </svg>
+            <div class="cat-name">Luna</div><div class="cat-caption" id="catMessage">Ready to learn with you!</div>
+          </div>
+        </div>
+        <p class="notice">Correct answer: Milo offers Luna a treat. Incorrect answer: a harmless cartoon bonk with stars. Keep practising!</p>
+      </section>
+
+      <section class="panel">
+        <h3>How your progress works</h3>
+        <p class="muted">Your answer totals and review list are saved in this browser on this device. Resetting progress clears those saved quiz records.</p>
+        <div class="progress-track"><div class="progress-fill" id="overallProgress"></div></div>
+        <p class="notice" id="overallLabel">No questions answered yet.</p>
+      </section>
+    </aside>
+  </div>
 </main>
+<footer>For educational exam preparation. Always verify clinical decisions against current professional guidance and local protocols.</footer>
 
-<footer>
-Educational practice only. These are not official or verified past HAAD/DOH examination questions.
-</footer>
-
+<script src="questions.js"></script>
 <script>
-"use strict";
+(() => {
+  "use strict";
+  const $ = id => document.getElementById(id);
+  const LETTERS = ["A","B","C","D"];
+  const STORAGE_KEY = "speechTherapistPractice_v2";
+  let saved = loadSaved();
+  let session = [];
+  let position = 0;
+  let sessionResults = [];
+  let selectedIndex = null;
+  let mode = "practice";
+  let timer = null;
+  let secondsLeft = 0;
+  let sessionStarted = false;
 
-/*
-Question format:
-[topic, question, four options, correct original option index, explanation]
-The answer-position system balances A/B/C/D across the complete question bank.
-*/
-
-const questions = [
-["Anatomy & Physiology","Which cranial nerve controls most tongue movements?",["Facial nerve","Trigeminal nerve","Hypoglossal nerve","Vagus nerve"],2,"The hypoglossal nerve (CN XII) supplies most intrinsic and extrinsic tongue muscles."],
-["Anatomy & Physiology","Which cranial nerve controls most muscles of facial expression?",["CN V","CN VII","CN IX","CN XII"],1,"The facial nerve (CN VII) supplies the muscles of facial expression."],
-["Anatomy & Physiology","What helps separate the nasal and oral cavities during swallowing?",["Vocal-fold closure","Velopharyngeal closure","Tongue-tip elevation alone","Eustachian-tube opening"],1,"The soft palate and pharyngeal walls help close the velopharyngeal port."],
-["Anatomy & Physiology","Where are the vocal folds located?",["Pharynx","Trachea","Larynx","Esophagus"],2,"The vocal folds are located in the larynx."],
-["Anatomy & Physiology","What provides the airflow energy for typical speech?",["Air expelled from the lungs","Air in the stomach","Middle-ear pressure","Tongue movement alone"],0,"Pulmonary airflow powers phonation and speech."],
-["Anatomy & Physiology","Which cranial nerve carries auditory and vestibular information?",["CN V","CN VII","CN X","CN VIII"],3,"The vestibulocochlear nerve (CN VIII) carries hearing and balance information."],
-["Anatomy & Physiology","What generates the primary sound source for voiced speech?",["Tongue clicking","Vocal-fold vibration","Lip closure alone","Nasal airflow alone"],1,"Vocal-fold vibration creates the primary sound source for voiced speech."],
-["Anatomy & Physiology","Which structure helps propel the food bolus backwards in the oral phase?",["Cochlea","Vocal folds","Tongue","Pinna"],2,"Tongue movements help form and propel the bolus towards the pharynx."],
-["Anatomy & Physiology","Which structure converts mechanical sound vibrations into neural activity?",["Cochlea","Pinna","Eustachian tube","Auditory canal"],0,"Cochlear hair cells transduce mechanical vibration into neural signals."],
-["Anatomy & Physiology","Which acoustic measure is most closely related to perceived pitch?",["Intensity","Duration","Amplitude","Fundamental frequency"],3,"Fundamental frequency is an important acoustic correlate of pitch."],
-
-["Language Development","Which communication behaviour usually appears before complex spoken sentences?",["Narrative writing","Intentional gestures","Metalinguistic reasoning","Reading paragraphs"],1,"Intentional gestures and early communication precede complex language."],
-["Language Development","A child says 'goed' instead of 'went'. This illustrates:",["Overregularization","Echolalia","Dysarthria","Cluttering"],0,"The child applies a regular past-tense rule to an irregular verb."],
-["Language Development","Which task assesses receptive language?",["Naming a picture","Telling a story","Following a spoken instruction","Repeating a sentence"],2,"Receptive language concerns understanding language."],
-["Language Development","Which is an expressive-language task?",["Identifying a named object","Following a direction","Matching sounds","Describing a picture"],3,"Describing a picture requires generating language."],
-["Language Development","A spontaneous language sample is useful for examining:",["Functional language use","Hearing thresholds alone","Lung volume alone","Oral strength alone"],0,"A sample can reveal vocabulary, grammar, and discourse in natural communication."],
-["Language Development","Joint attention involves:",["Independent play only","Sharing attention with another person towards an object or event","Repeating words only","Looking at written text"],1,"Joint attention is shared attention between people towards a common focus."],
-["Language Development","Which approach can support language development during play?",["Correct every error immediately","Avoid the child's interests","Responsive interaction and language modelling","Use testing without interaction"],2,"Responsive modelling during meaningful activities supports communication."],
-["Language Development","The study of word meaning is called:",["Phonology","Syntax","Pragmatics","Semantics"],3,"Semantics concerns meaning in language."],
-["Language Development","Taking conversational turns is an example of:",["Pragmatics","Respiration","Phonation","Auditory reflex"],0,"Pragmatics concerns the social use of communication."],
-["Language Development","When assessing a multilingual child, the clinician should:",["Assess English only in all cases","Consider exposure and abilities across languages","Discourage the home language","Assume multilingualism causes disorder"],1,"Language history and skills across languages help distinguish difference from disorder."],
-
-["Speech Sound Disorders","A predictable pattern that simplifies adult speech sounds is called:",["Aphasia","Dysphonia","Phonological process","Dysphagia"],2,"Phonological processes are patterns that simplify speech sound structures."],
-["Speech Sound Disorders","A frontal lisp commonly affects which sounds?",["/m/ and /n/","/k/ and /g/","All vowels","/s/ and /z/"],3,"Frontal tongue placement commonly affects sibilants such as /s/ and /z/."],
-["Speech Sound Disorders","Which assessment can examine consonant accuracy in single words?",["Structured articulation assessment","Swallow study","Voice range profile alone","Pure-tone audiogram alone"],0,"A structured word sample permits analysis of consonant production."],
-["Speech Sound Disorders","Speech intelligibility refers to:",["How loud speech sounds","How much a listener understands","How long a breath lasts","How well a person hears"],1,"Intelligibility is the degree to which speech is understood."],
-["Speech Sound Disorders","Minimal-pair therapy commonly targets:",["Vocal-fold paralysis","Hearing thresholds","Phonological contrasts","Swallowing aspiration"],2,"Minimal pairs contrast words that differ by a phoneme."],
-["Speech Sound Disorders","Replacing /k/ with /t/ is an example of:",["Backing","Gliding","Voicing","Fronting"],3,"Fronting replaces a velar sound such as /k/ with a more anterior sound."],
-["Speech Sound Disorders","Saying 'ca' for 'cat' illustrates:",["Final consonant deletion","Stopping","Backing","Vowel insertion"],0,"The final consonant /t/ is omitted."],
-["Speech Sound Disorders","The main goal of articulation therapy is to:",["Improve reading speed only","Improve production and generalisation of target sounds","Eliminate every dialect feature","Treat swallowing without assessment"],1,"Articulation therapy aims to improve sound accuracy and generalisation."],
-["Speech Sound Disorders","When interpreting a child's speech errors, consider:",["Height alone","Handwriting speed","Age, language background, and dialect","Toy preferences only"],2,"Developmental expectations and language variation are important in interpretation."],
-["Speech Sound Disorders","Stimulability testing examines whether a person can:",["Read complex text","Swallow thin liquids","Hear every frequency normally","Produce a target sound with cues"],3,"Stimulability assesses production of a target sound with support."],
-
-["Aphasia & Motor Speech","Aphasia most commonly follows damage to:",["Brain language networks","The external ear only","The vocal folds only","The jaw joint only"],0,"Aphasia is an acquired language disorder caused by brain damage."],
-["Aphasia & Motor Speech","Nonfluent aphasia often involves:",["Normal speech in every context","Effortful, reduced verbal output","Only hearing loss","Swallowing difficulty alone"],1,"Nonfluent aphasia commonly features reduced, effortful speech."],
-["Aphasia & Motor Speech","Dysarthria is primarily a disorder of:",["Word meaning","Reading comprehension","Motor execution of speech","Hearing sensitivity"],2,"Dysarthria results from impaired neuromuscular execution of speech."],
-["Aphasia & Motor Speech","Apraxia of speech primarily affects:",["Hearing thresholds","Word meaning only","Saliva production","Planning or programming speech movements"],3,"Apraxia of speech affects the planning/programming of speech movements."],
-["Aphasia & Motor Speech","Which feature can occur in apraxia of speech?",["Inconsistent errors and articulatory groping","Only reduced hearing thresholds","Always normal prosody","No difficulty sequencing sounds"],0,"Inconsistent errors, groping, and disrupted prosody may occur."],
-["Aphasia & Motor Speech","Which approach can support functional communication after aphasia?",["Speech-only responses at all times","Supported conversation and multimodal communication","Avoid visual aids","Correct every error during every exchange"],1,"Gesture, writing, pictures, and partner strategies can support communication."],
-["Aphasia & Motor Speech","Confrontation naming asks a person to:",["Sustain a vowel","Follow a swallowing diet","Name a pictured object","Detect a pure tone"],2,"The client names an object or picture presented by the examiner."],
-["Aphasia & Motor Speech","A motor-speech assessment commonly examines:",["Vocabulary only","Spelling only","Auditory thresholds only","Respiration, phonation, articulation, resonance, and prosody"],3,"These are key speech subsystems in a motor-speech examination."],
-["Aphasia & Motor Speech","Which statement about aphasia is accurate?",["It can affect speaking, comprehension, reading, and writing","It always affects global intelligence","It is always caused by hearing loss","It only affects articulation"],0,"Aphasia can affect multiple language modalities, with varying profiles."],
-["Aphasia & Motor Speech","For a person with severe motor-speech limitations, consider:",["Withholding communication","AAC and other communication supports","Assuming comprehension is absent","Using long spoken questions only"],1,"AAC can support participation when speech is limited."],
-
-["Fluency, Voice & Resonance","Stuttering may involve:",["Only incorrect vowel placement","Loss of hearing sensitivity","Repetitions, prolongations, or blocks","Swallowing residue"],2,"These are common core behaviours associated with stuttering."],
-["Fluency, Voice & Resonance","Cluttering may involve:",["Consistently slow speech only","Vocal-fold nodules in every case","Complete absence of language","Rapid or irregular rate and reduced clarity"],3,"Cluttering may include irregular rate, excessive disfluencies, and reduced clarity."],
-["Fluency, Voice & Resonance","Dysphonia means:",["A voice disorder","A language comprehension disorder","A hearing threshold disorder","A swallowing reflex"],0,"Dysphonia describes a voice problem involving quality, pitch, loudness, or effort."],
-["Fluency, Voice & Resonance","A persistent voice disorder may require assessment by an:",["Optometrist","Otolaryngologist (ENT)","Audiologist only in every case","Orthodontist in every case"],1,"Laryngeal examination may be needed to investigate persistent voice symptoms."],
-["Fluency, Voice & Resonance","Hypernasality refers to:",["No nasal airflow during nasal sounds","Low hearing thresholds","Excessive nasal resonance on oral sounds","Tongue weakness in every case"],2,"Hypernasality can be associated with velopharyngeal dysfunction."],
-["Fluency, Voice & Resonance","Which behaviour supports vocal health?",["Shout daily","Smoke to reduce dryness","Whisper forcefully for hours","Maintain hydration and avoid vocal overuse"],3,"Hydration and sensible voice use can support vocal health."],
-["Fluency, Voice & Resonance","Which measure describes vocal pitch acoustically?",["Fundamental frequency","Blood pressure","Respiratory rate alone","Pure-tone average"],0,"Fundamental frequency is an acoustic correlate of perceived pitch."],
-["Fluency, Voice & Resonance","When supporting a child who stutters, clinicians should:",["Punish repetitions","Use supportive communication and individualised goals","Stop the child speaking whenever stuttering occurs","Assume the child is unaware"],1,"Supportive care avoids blame and considers the child's communication needs."],
-["Fluency, Voice & Resonance","Which voice symptom warrants medical evaluation?",["A voice that is normal","A brief change that fully resolves","Persistent hoarseness, especially with risk factors","Normal conversational voice"],2,"Persistent hoarseness warrants assessment; urgency depends on duration and associated symptoms."],
-["Fluency, Voice & Resonance","Speech resonance is shaped mainly by the:",["Finger joints","Retina","Middle-ear bones alone","Oral, nasal, and pharyngeal cavities"],3,"The vocal tract cavities shape resonance."],
-
-["Autism & AAC","AAC stands for:",["Augmentative and Alternative Communication","Auditory Assessment Checklist","Automatic Articulation Correction","Applied Acoustic Control"],0,"AAC includes methods that supplement or replace spoken communication."],
-["Autism & AAC","Which is an example of aided AAC?",["A spoken word alone","A communication board","A facial expression alone","A head nod without equipment"],1,"A communication board is a form of aided AAC."],
-["Autism & AAC","Which statement about AAC is appropriate?",["It must wait until speech therapy fails for years","It always prevents speech development","It can be introduced when needed and used alongside speech","It is only for adults"],2,"AAC can support communication and be combined with spoken-language intervention."],
-["Autism & AAC","A respectful autism-affirming approach should:",["Force eye contact to prove attention","Ignore self-advocacy","Assume everyone has the same profile","Respect individual communication and sensory needs"],3,"Support should be individualised and respect autonomy."],
-["Autism & AAC","An AAC communication partner can:",["Model the system during natural interaction","Keep the device out of reach","Require a correct response before acknowledging communication","Use AAC only during tests"],0,"Aided language modelling provides meaningful examples of AAC use."],
-["Autism & AAC","Echolalia may serve which function?",["Proof of no understanding","Communication, processing, or self-regulation","Always meaningless behaviour","Proof of hearing loss"],1,"Echolalia can have different functions depending on context."],
-["Autism & AAC","AAC vocabulary should include:",["Nouns only","Only words adults prefer","Words for varied daily communication, including refusal and comments","Only requests for food"],2,"Broad vocabulary supports many communicative functions."],
-["Autism & AAC","A useful social-communication goal should:",["Force identical eye contact","Eliminate harmless self-regulation","Reward compliance regardless of distress","Support meaningful participation and communication"],3,"Goals should support function, autonomy, and participation."],
-["Autism & AAC","A picture exchange system is:",["An aided communication approach using pictures","A hearing screening method","A voice examination","A swallowing manoeuvre"],0,"Picture exchange is one form of aided communication intervention."],
-["Autism & AAC","If an AAC device is temporarily unavailable, the clinician should:",["Assume the person has nothing to say","Provide an accessible backup communication method","Require speech only","Cancel communication opportunities"],1,"A backup plan protects communication access."],
-
-["Dysphagia & Feeding","Dysphagia refers to difficulty with:",["Hearing","Voice pitch alone","Swallowing","Written language"],2,"Dysphagia is a swallowing disorder."],
-["Dysphagia & Feeding","Which may indicate a swallowing problem?",["Clear speech in all contexts","Normal appetite alone","Improved handwriting","Coughing or choking during meals"],3,"Coughing or choking may signal dysphagia, but aspiration can be silent."],
-["Dysphagia & Feeding","Which study uses moving X-ray images to examine swallowing?",["Videofluoroscopic swallow study (VFSS)","Pure-tone audiometry","EEG alone","Spirometry alone"],0,"VFSS provides dynamic X-ray imaging of swallowing."],
-["Dysphagia & Feeding","What does FEES stand for?",["Fluency Evaluation and Exercise Scale","Flexible Endoscopic Evaluation of Swallowing","Functional Examination of Expressive Speech","Frequency Estimation of Ear Sounds"],1,"FEES uses a flexible endoscope to examine swallowing."],
-["Dysphagia & Feeding","Before recommending a swallowing strategy, the clinician should:",["Prescribe thickened liquids to everyone","Assume no cough means no aspiration","Assess the person and relevant risks","Use the same diet for all diagnoses"],2,"Swallowing recommendations must be individualised to assessment findings."],
-["Dysphagia & Feeding","Aspiration occurs when material enters the:",["Stomach through the oesophagus","Oral cavity from the lips","Nasal cavity only","Airway below the vocal folds"],3,"Aspiration means material passes below the vocal folds into the airway."],
-["Dysphagia & Feeding","Why is oral care important for people at aspiration risk?",["It may reduce harmful oral bacterial burden","It guarantees aspiration never occurs","It replaces swallowing assessment","It automatically closes the airway"],0,"Oral hygiene may reduce oral pathogens and help reduce pneumonia risk."],
-["Dysphagia & Feeding","Which can be a sign of dehydration?",["Improved hydration status","Reduced urine output and dry mouth","Normal fluid intake in every case","Increased hearing sensitivity"],1,"Reduced urine output and dry mouth can indicate dehydration."],
-["Dysphagia & Feeding","A clinical swallowing evaluation helps the clinician:",["Confirm every aspiration event without exception","Replace instrumental assessment in all cases","Examine history and swallowing signs to guide care","Measure vocabulary only"],2,"Clinical assessment guides management and decisions about further investigation."],
-["Dysphagia & Feeding","A person is choking severely and cannot breathe. What should happen?",["Offer water immediately","Continue the meal","Wait for a routine appointment","Activate emergency response and provide appropriate choking first aid"],3,"Severe airway obstruction is an emergency."],
-
-["Hearing & Early Intervention","An audiogram displays:",["Hearing thresholds across frequencies","Language sample length","Tongue strength","Swallowing timing only"],0,"An audiogram plots hearing thresholds across frequencies."],
-["Hearing & Early Intervention","A child responds inconsistently to speech. An appropriate next step is to:",["Assume the child is inattentive","Arrange hearing evaluation and assess communication development","Begin voice therapy only","Wait indefinitely"],1,"Hearing should be assessed when listening concerns are present."],
-["Hearing & Early Intervention","Newborn hearing screening aims to:",["Diagnose every language disorder","Measure speech intelligibility","Identify infants needing further hearing assessment","Test reading ability"],2,"Screening identifies infants who need diagnostic hearing evaluation."],
-["Hearing & Early Intervention","Which device can amplify sound for a person with hearing loss?",["Communication spoon","Laryngeal mask","Tongue depressor","Hearing aid"],3,"Hearing aids amplify sound according to an individual's hearing needs."],
-["Hearing & Early Intervention","Why is early intervention important for children with hearing loss?",["It supports timely access to language and communication","It guarantees identical outcomes","It removes the need for family involvement","It is useful only after school age"],0,"Early communication access and appropriate support are important for development."],
-["Hearing & Early Intervention","Which behavioural hearing test may be used with young children?",["Written spelling test","Visual reinforcement audiometry","Maximum phonation time","Naming abstract pictures only"],1,"Visual reinforcement audiometry can be used when developmentally appropriate."],
-["Hearing & Early Intervention","What is the function of the middle-ear ossicles?",["Generate language","Control tongue movement","Transmit sound vibrations towards the inner ear","Produce cerebrospinal fluid"],2,"The malleus, incus, and stapes transmit sound vibration through the middle ear."],
-["Hearing & Early Intervention","A communication plan for a child with hearing loss should be:",["The same for every child","Speech-only without discussion","Delayed until speech develops","Individualised and family-centred"],3,"Planning should consider the child's needs and informed family preferences."],
-["Hearing & Early Intervention","Tympanometry primarily provides information about:",["Middle-ear function and eardrum mobility","Word retrieval","Articulation accuracy","Lung capacity"],0,"Tympanometry measures middle-ear acoustic immittance."],
-["Hearing & Early Intervention","Which condition can cause conductive hearing loss?",["Cortical aphasia","Middle-ear fluid","Vocal-fold nodules","Dysarthria"],1,"Fluid in the middle ear can impair sound transmission."],
-
-["Evidence-Based Practice","Evidence-based practice integrates research with:",["Research articles alone","Personal preference alone","Clinical expertise and client values","The newest treatment regardless of evidence"],2,"Evidence-based practice combines evidence, clinical expertise, and client values."],
-["Evidence-Based Practice","Why collect baseline measurements before therapy?",["Guarantee improvement","Replace goal setting","Avoid reassessment","Document current performance for comparison"],3,"Baseline data help measure change over time."],
-["Evidence-Based Practice","Treatment outcomes should be measured using:",["Relevant measures linked to functional goals","Clinician memory alone","An unrelated test","An undocumented impression"],0,"Outcome measures should relate to the treatment target and be reliable."],
-["Evidence-Based Practice","Diagnostic sensitivity is the proportion of people with a condition who:",["Test negative","Test positive","Receive treatment","Have no symptoms"],1,"Sensitivity is the true-positive rate."],
-["Evidence-Based Practice","Diagnostic specificity is the proportion of people without a condition who:",["Test positive","Receive treatment","Test negative","Have symptoms"],2,"Specificity is the true-negative rate."],
-["Evidence-Based Practice","Why monitor treatment progress regularly?",["Avoid changing ineffective treatment","Ensure every client has identical sessions","Replace informed consent","Adjust the plan according to response"],3,"Progress data support informed treatment decisions."],
-["Evidence-Based Practice","A systematic review aims to:",["Systematically identify and synthesise relevant studies","Describe one patient only","Replace all clinical judgement","Guarantee every study is high quality"],0,"Systematic reviews use explicit methods to synthesise research."],
-["Evidence-Based Practice","A clinically meaningful outcome is one that:",["Is statistically significant regardless of impact","Matters to daily functioning or client goals","Is unrelated to the referral concern","Is chosen only for convenience"],1,"Meaningful outcomes connect to function, participation, or client priorities."],
-["Evidence-Based Practice","When evidence is limited, a clinician should:",["Claim the treatment is proven","Ignore client preferences","Discuss uncertainty and monitor outcomes","Stop documenting decisions"],2,"Transparent reasoning and outcome monitoring are important when evidence is uncertain."],
-["Evidence-Based Practice","Which is the most measurable therapy goal?",["The client will speak better","The client will improve soon","The client will try harder","The client will produce the target sound correctly in 8 of 10 trials"],3,"A measurable goal includes a specific target and performance criterion."],
-
-["Ethics & Clinical Practice","Informed consent means:",["Voluntary agreement after understandable information","A signature without explanation","Permission from anyone regardless of authority","A guarantee of success"],0,"Consent requires information, understanding, and voluntariness."],
-["Ethics & Clinical Practice","How should confidential patient information be handled?",["Discuss it publicly without names","Share it only with authorised people for legitimate purposes","Send it to anyone who asks","Post case details online"],1,"Confidentiality must follow professional duties and applicable law."],
-["Ethics & Clinical Practice","If a case exceeds a clinician's competence, they should:",["Proceed without support","Hide the limitation","Seek supervision, training, or appropriate referral","Guarantee an outcome"],2,"Clinicians should work within competence and obtain appropriate support."],
-["Ethics & Clinical Practice","Person-centred care involves:",["Setting all goals without discussion","Ignoring language preferences","Prioritising convenience over safety","Collaborating on goals relevant to the client"],3,"Person-centred care respects the client's priorities and context."],
-["Ethics & Clinical Practice","Clinical documentation should record:",["Assessment, decisions, services, outcomes, and relevant communication","Only successful sessions","Opinions without clinical relevance","Only billing information"],0,"Clear documentation supports continuity, accountability, and safe care."],
-["Ethics & Clinical Practice","When using an interpreter, the clinician should generally:",["Speak only to the interpreter","Address the client directly and use an appropriate interpreter","Assume any relative is always suitable","Avoid checking understanding"],1,"Direct engagement with the client supports respectful communication."],
-["Ethics & Clinical Practice","If immediate danger to a patient is suspected, the clinician should:",["Ignore it unless it happens again","Discuss it casually with others","Follow relevant emergency and safeguarding procedures","Delay all action until a routine appointment"],2,"Urgent risks require prompt action under applicable safety procedures."],
-["Ethics & Clinical Practice","If a client declines recommended treatment, the clinician should:",["Force the intervention","End communication immediately","Alter the record to show consent","Discuss concerns and options, respect autonomy, and document appropriately"],3,"Respect for autonomy includes informed discussion and appropriate documentation."],
-["Ethics & Clinical Practice","Professional boundaries help:",["Maintain a safe, respectful therapeutic relationship","Allow personal benefit from patients","Remove the need for consent","Guarantee outcomes"],0,"Professional boundaries protect clients and the therapeutic relationship."],
-["Ethics & Clinical Practice","Culturally responsive practice includes:",["Assuming everyone from one culture is identical","Asking about language, communication preferences, and relevant context","Treating dialect differences automatically as disorders","Excluding the client from decisions"],1,"Culturally responsive care considers the individual and avoids assumptions."]
-];
-
-const $ = id => document.getElementById(id);
-const STORE = "speechPractice100_v3";
-let saved = {};
-try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch(e) {}
-if (!saved.answers) saved.answers = {};
-if (!saved.incorrect) saved.incorrect = [];
-if (!saved.choice) saved.choice = {};
-if (!saved.optionOrders) saved.optionOrders = {};
-
-let list = questions.map((q,i)=>i);
-let current = 0;
-let mode = "all";
-let testAnswers = {};
-let testOrders = {};
-let targetPositions = [];
-let sessionId = 0;
-
-function persist(){
- try { localStorage.setItem(STORE,JSON.stringify(saved)); } catch(e) {}
- updateStats();
-}
-function updateStats(){
- const answered = Object.keys(saved.answers).filter(k=>saved.answers[k]!==undefined).length;
- const correct = Object.values(saved.answers).filter(v=>v===true).length;
- $("attempted").textContent=answered;
- $("correctCount").textContent=correct;
- $("accuracy").textContent=answered?Math.round(correct/answered*100)+"%":"0%";
- $("progressBar").style.width=Math.min(100,answered/100*100)+"%";
-}
-function shuffle(a){
- for(let i=a.length-1;i>0;i--){
-  const j=Math.floor(Math.random()*(i+1));
-  [a[i],a[j]]=[a[j],a[i]];
- }
- return a;
-}
-function prepareOrders(indices,balanced){
- const positions=[];
- if(balanced){
-  for(let i=0;i<indices.length;i++)positions.push(i%4);
-  shuffle(positions);
- } else {
-  indices.forEach(()=>positions.push(Math.floor(Math.random()*4)));
- }
- indices.forEach((idx,n)=>{
-  const correctIndex=questions[idx][3];
-  const target=positions[n];
-  const distractors=[0,1,2,3].filter(i=>i!==correctIndex);
-  shuffle(distractors);
-  const order=[];
-  let d=0;
-  for(let slot=0;slot<4;slot++){
-   order[slot]=slot===target?correctIndex:distractors[d++];
+  function loadSaved() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+        answered:0, correct:0, attempts:{}, mistakes:[], session:null
+      };
+    } catch { return {answered:0,correct:0,attempts:{},mistakes:[],session:null}; }
   }
-  testOrders[idx]=order;
- });
-}
-function makeList(){
- const topic=$("topic").value;
- return questions.map((q,i)=>i).filter(i=>
-  (topic==="All"||questions[i][0]===topic) &&
-  (mode!=="incorrect"||saved.incorrect.includes(i))
- );
-}
-function begin(newMode="all"){
- mode=newMode;
- list=makeList();
- if(mode==="mock"){
-  shuffle(list);
-  list=list.slice(0,20);
- }
- current=0;
- testAnswers={};
- testOrders={};
- prepareOrders(list,mode==="all"&&$("topic").value==="All");
- sessionId++;
- $("results").classList.add("hidden");
- $("quiz").classList.remove("hidden");
- if(!list.length){
-  $("position").textContent="No questions available";
-  $("question").textContent="There are no incorrect answers to review for this selection.";
-  $("options").innerHTML="";
-  $("feedback").classList.add("hidden");
-  $("previous").disabled=true;
-  $("next").disabled=true;
-  return;
- }
- render();
-}
-function render(){
- const idx=list[current],q=questions[idx];
- const order=testOrders[idx];
- const answerValue=mode==="all"||mode==="incorrect"?saved.answers[idx]:testAnswers[idx];
- const chosen=mode==="all"||mode==="incorrect"?saved.choice[idx]:(testAnswers[idx]&&testAnswers[idx].choice);
- $("position").textContent=`Question ${current+1} of ${list.length} · ${q[0]}`;
- $("question").textContent=q[1];
- $("options").innerHTML="";
- $("feedback").classList.add("hidden");
- $("feedback").textContent="";
- order.forEach((originalIndex,displayIndex)=>{
-  const b=document.createElement("button");
-  b.className="option";
-  b.textContent=String.fromCharCode(65+displayIndex)+". "+q[2][originalIndex];
-  b.disabled=answerValue!==undefined;
-  if(answerValue!==undefined&&originalIndex===q[3])b.classList.add("correct");
-  if(answerValue===false&&chosen===originalIndex&&originalIndex!==q[3])b.classList.add("wrong");
-  b.onclick=()=>answer(idx,originalIndex);
-  $("options").appendChild(b);
- });
- if(answerValue!==undefined)showFeedback(idx,answerValue,order);
- $("previous").disabled=current===0;
- $("next").disabled=false;
- $("next").textContent=current===list.length-1?"Finish":"Next Question";
-}
-function answer(idx,originalIndex){
- const right=originalIndex===questions[idx][3];
- if(mode==="all"||mode==="incorrect"){
-  if(saved.answers[idx]!==undefined)return;
-  saved.choice[idx]=originalIndex;
-  saved.answers[idx]=right;
-  if(right)saved.incorrect=saved.incorrect.filter(i=>i!==idx);
-  else if(!saved.incorrect.includes(idx))saved.incorrect.push(idx);
-  persist();
-  render();
- } else {
-  if(testAnswers[idx]!==undefined)return;
-  testAnswers[idx]={right,choice:originalIndex};
-  render();
- }
-}
-function showFeedback(idx,right,order){
- const q=questions[idx],f=$("feedback");
- const correctPosition=order.indexOf(q[3]);
- f.className=right?"good":"bad";
- f.textContent=(right?"Correct! ":"Not quite. Correct answer: "+
-  String.fromCharCode(65+correctPosition)+". "+q[2][q[3]]+". ")+q[4];
-}
-function next(){
- if(current<list.length-1){current++;render();return;}
- $("quiz").classList.add("hidden");
- $("results").classList.remove("hidden");
- if(mode==="mock"){
-  const done=Object.values(testAnswers);
-  const correct=done.filter(a=>a.right).length;
-  $("resultText").textContent=`Mock test result: ${correct} correct out of ${done.length} answered. Score: ${Math.round(correct/20*100)}%. Unanswered questions count as incorrect.`;
- } else {
-  const done=list.filter(i=>saved.answers[i]!==undefined);
-  const correct=done.filter(i=>saved.answers[i]===true).length;
-  $("resultText").textContent=`Practice set finished. ${correct} correct among ${done.length} questions answered in this set. Overall progress is shown above.`;
- }
-}
-$("start").onclick=()=>begin("all");
-$("review").onclick=()=>begin("incorrect");
-$("mock").onclick=()=>begin("mock");
-$("again").onclick=()=>begin(mode);
-$("backToPractice").onclick=()=>begin("all");
-$("previous").onclick=()=>{if(current>0){current--;render();}};
-$("next").onclick=next;
-$("topic").onchange=()=>begin(mode==="mock"?"all":mode);
-$("reset").onclick=()=>{
- if(confirm("Reset all saved answers and progress on this browser?")){
-  saved={answers:{},incorrect:[],choice:{},optionOrders:{}};
-  try{localStorage.removeItem(STORE);}catch(e){}
-  updateStats();
-  begin("all");
- }
-};
-updateStats();
-begin("all");
+  function save() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); } catch {}
+    renderStats();
+  }
+  function bank() {
+    if (typeof QUESTION_BANK === "undefined" || !Array.isArray(QUESTION_BANK)) return [];
+    return QUESTION_BANK;
+  }
+  function getId(q) { return String(q.id); }
+  function populateTopics() {
+    const topics = [...new Set(bank().map(q => q.topic).filter(Boolean))].sort();
+    $("topic").innerHTML = '<option value="All">All topics</option>' +
+      topics.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join("");
+  }
+  function escapeHtml(s) {
+    return String(s ?? "").replace(/[&<>"']/g, c => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[c]));
+  }
+  function renderStats() {
+    $("answeredStat").textContent = saved.answered || 0;
+    $("correctStat").textContent = saved.correct || 0;
+    $("accuracyStat").textContent = saved.answered ?
+      Math.round(saved.correct / saved.answered * 100) + "%" : "0%";
+    $("reviewStat").textContent = (saved.mistakes || []).length;
+    const total = bank().length;
+    const seen = Object.keys(saved.attempts || {}).length;
+    $("overallProgress").style.width = (total ? Math.min(100, seen / total * 100) : 0) + "%";
+    $("overallLabel").textContent = total
+      ? `${seen} of ${total} bank questions attempted at least once.`
+      : "Question bank not loaded.";
+    $("bankNotice").textContent = total
+      ? `${total} questions loaded. ${countLevel("Easy")} Easy · ${countLevel("Moderate")} Moderate · ${countLevel("Hard")} Hard.`
+      : "No questions loaded. Check that questions.js is in the same repository folder.";
+  }
+  function countLevel(level) { return bank().filter(q => q.difficulty === level).length; }
+  function validQuestion(q) {
+    return q && q.id != null && q.question && Array.isArray(q.options) &&
+      q.options.length === 4 && Number.isInteger(q.answer) &&
+      q.answer >= 0 && q.answer < 4 && q.explanation;
+  }
+  function getFilteredQuestions() {
+    const diff = $("difficulty").value;
+    const topic = $("topic").value;
+    let qs = bank().filter(validQuestion);
+    if (diff !== "All") qs = qs.filter(q => q.difficulty === diff);
+    if (topic !== "All") qs = qs.filter(q => q.topic === topic);
+    if ($("mode").value === "review") {
+      const ids = new Set((saved.mistakes || []).map(String));
+      qs = qs.filter(q => ids.has(getId(q)));
+    }
+    return qs;
+  }
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i],a[j]] = [a[j],a[i]];
+    }
+    return a;
+  }
+  function startSession(fromSaved = false) {
+    stopTimer();
+    if (fromSaved && saved.session && Array.isArray(saved.session.ids)) {
+      const map = new Map(bank().map(q => [getId(q), q]));
+      session = saved.session.ids.map(id => map.get(String(id))).filter(Boolean);
+      position = Math.min(saved.session.position || 0, Math.max(0,session.length-1));
+      sessionResults = saved.session.results || [];
+      mode = saved.session.mode || "practice";
+    } else {
+      const qs = shuffle(getFilteredQuestions().slice());
+      if (!qs.length) {
+        alert($("mode").value === "review"
+          ? "There are no incorrect questions to review yet."
+          : "No matching questions were found. Check your question bank.");
+        return;
+      }
+      const length = $("sessionLength").value;
+      session = length === "all" ? qs : qs.slice(0, Number(length));
+      position = 0; sessionResults = [];
+      mode = $("mode").value;
+    }
+    sessionStarted = true;
+    $("setupPanel").classList.add("hidden");
+    $("resultPanel").classList.add("hidden");
+    $("reviewPanel").classList.add("hidden");
+    $("quizPanel").classList.remove("hidden");
+    $("quizModeLabel").textContent = mode === "exam" ? "Mock exam" :
+      mode === "review" ? "Mistake review" : "Practice mode";
+    if (mode === "exam") startTimer(session.length * 60);
+    else $("timerLabel").classList.add("hidden");
+    renderQuestion();
+    persistSession();
+  }
+  function persistSession() {
+    saved.session = sessionStarted ? {
+      ids:session.map(getId), position, results:sessionResults, mode
+    } : null;
+    save();
+  }
+  function startTimer(seconds) {
+    secondsLeft = seconds;
+    $("timerLabel").classList.remove("hidden");
+    updateTimer();
+    timer = setInterval(() => {
+      secondsLeft--;
+      updateTimer();
+      if (secondsLeft <= 0) {
+        stopTimer();
+        finishSession(true);
+      }
+    },1000);
+  }
+  function updateTimer() {
+    const m = Math.floor(Math.max(0,secondsLeft)/60);
+    const s = Math.max(0,secondsLeft)%60;
+    $("timerLabel").textContent = `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+  }
+  function stopTimer() { if (timer) clearInterval(timer); timer = null; }
+  function renderQuestion() {
+    selectedIndex = null;
+    const q = session[position];
+    if (!q) return finishSession(false);
+    $("questionCount").textContent = `Question ${position+1} of ${session.length} · ${q.difficulty}`;
+    $("sessionProgress").style.width = `${position / session.length * 100}%`;
+    $("questionText").textContent = q.question;
+    $("options").innerHTML = "";
+    $("feedback").className = "feedback";
+    $("feedback").innerHTML = "";
+    $("nextBtn").disabled = true;
+    $("nextBtn").textContent = position === session.length-1 ? "Finish session ✓" : "Next question →";
+    q.options.forEach((option,i) => {
+      const b = document.createElement("button");
+      b.className = "option";
+      b.type = "button";
+      b.innerHTML = `<span class="option-letter">${LETTERS[i]}</span><span>${escapeHtml(option)}</span>`;
+      b.addEventListener("click", () => selectAnswer(i));
+      $("options").appendChild(b);
+    });
+  }
+  function selectAnswer(index) {
+    if (selectedIndex !== null) return;
+    selectedIndex = index;
+    const q = session[position];
+    const correct = index === q.answer;
+    const buttons = [...$("options").querySelectorAll("button")];
+    buttons.forEach((b,i) => {
+      b.disabled = true;
+      if (i === q.answer) b.classList.add("correct");
+      if (i === index && !correct) b.classList.add("wrong");
+    });
+    sessionResults.push({id:getId(q), selected:index, correct});
+    saved.answered = (saved.answered || 0) + 1;
+    saved.attempts = saved.attempts || {};
+    saved.attempts[getId(q)] = (saved.attempts[getId(q)] || 0) + 1;
+    if (correct) {
+      saved.correct = (saved.correct || 0) + 1;
+      saved.mistakes = (saved.mistakes || []).filter(id => String(id) !== getId(q));
+      animateCats(true);
+    } else {
+      saved.mistakes = saved.mistakes || [];
+      if (!saved.mistakes.map(String).includes(getId(q))) saved.mistakes.push(getId(q));
+      animateCats(false);
+    }
+    if (mode !== "exam") showFeedback(q,index,correct);
+    $("nextBtn").disabled = false;
+    save();
+    persistSession();
+  }
+  function showFeedback(q,index,correct) {
+    const f = $("feedback");
+    f.className = "feedback show " + (correct ? "good" : "bad");
+    f.innerHTML = `<strong>${correct ? "Correct! 🎉" : "Not quite — keep going."}</strong>
+      <div><b>Correct answer: ${LETTERS[q.answer]}.</b> ${escapeHtml(q.options[q.answer])}</div>
+      <p>${escapeHtml(q.explanation)}</p>
+      ${q.topic ? `<small>Topic: ${escapeHtml(q.topic)}</small>` : ""}`;
+  }
+  function animateCats(correct) {
+    const owner = $("owner"), student = $("student");
+    owner.classList.remove("feed"); student.classList.remove("happy","bonk");
+    void student.offsetWidth;
+    if (correct) {
+      owner.classList.add("feed"); student.classList.add("happy");
+      $("catMessage").textContent = "Correct! Treat time! 🐟";
+    } else {
+      student.classList.add("bonk");
+      $("catMessage").textContent = "Bonk! Stars! Try again!";
+    }
+    setTimeout(() => {
+      owner.classList.remove("feed"); student.classList.remove("happy","bonk");
+      $("catMessage").textContent = "Ready to learn with you!";
+    },850);
+  }
+  function nextQuestion() {
+    if (selectedIndex === null) return;
+    if (position < session.length-1) {
+      position++; renderQuestion(); persistSession();
+    } else finishSession(false);
+  }
+  function finishSession(timeUp) {
+    stopTimer();
+    sessionStarted = false;
+    saved.session = null;
+    save();
+    $("quizPanel").classList.add("hidden");
+    $("resultPanel").classList.remove("hidden");
+    $("sessionProgress").style.width = "100%";
+    const answered = sessionResults.length;
+    const correct = sessionResults.filter(r => r.correct).length;
+    const pct = answered ? Math.round(correct/answered*100) : 0;
+    $("resultTitle").textContent = timeUp ? "Time is up!" : "Session complete!";
+    $("resultSummary").textContent =
+      `You answered ${answered} of ${session.length} questions in this session. ` +
+      `${correct} correct · ${answered-correct} incorrect · ${pct}% accuracy.` +
+      (timeUp ? " Unanswered questions were not counted." : "");
+    $("resultProgress").style.width = pct + "%";
+  }
+  function showReview() {
+    stopTimer();
+    const ids = new Set((saved.mistakes || []).map(String));
+    const items = bank().filter(q => ids.has(getId(q)));
+    $("setupPanel").classList.add("hidden");
+    $("quizPanel").classList.add("hidden");
+    $("resultPanel").classList.add("hidden");
+    $("reviewPanel").classList.remove("hidden");
+    $("reviewSummary").textContent = `${items.length} question(s) currently in your mistake list. Answer them correctly in a later attempt to remove them.`;
+    $("reviewList").innerHTML = items.length ? items.map((q,i) =>
+      `<div class="review-item"><h3>${i+1}. ${escapeHtml(q.question)}</h3>
+      <p><b>Correct answer: ${LETTERS[q.answer]}.</b> ${escapeHtml(q.options[q.answer])}</p>
+      <p class="muted">${escapeHtml(q.explanation)}</p>
+      <span class="pill">${escapeHtml(q.difficulty)} · ${escapeHtml(q.topic)}</span></div>`
+    ).join("") : "<p>No mistakes saved. Great work!</p>";
+  }
+  function showSetup() {
+    stopTimer(); sessionStarted = false;
+    $("quizPanel").classList.add("hidden");
+    $("resultPanel").classList.add("hidden");
+    $("reviewPanel").classList.add("hidden");
+    $("setupPanel").classList.remove("hidden");
+    saved.session = null; save();
+  }
+  $("startBtn").addEventListener("click", () => startSession(false));
+  $("resumeBtn").addEventListener("click", () => {
+    if (saved.session) startSession(true);
+    else alert("There is no saved session to resume.");
+  });
+  $("nextBtn").addEventListener("click", nextQuestion);
+  $("quitBtn").addEventListener("click", () => {
+    if (confirm("End this session? Your overall answer history will remain saved.")) showSetup();
+  });
+  $("againBtn").addEventListener("click", () => { showSetup(); startSession(false); });
+  $("reviewBtn").addEventListener("click", showReview);
+  $("closeReviewBtn").addEventListener("click", showSetup);
+  $("backSetupBtn").addEventListener("click", showSetup);
+  $("practiceMistakesBtn").addEventListener("click", () => {
+    $("mode").value = "review"; startSession(false);
+  });
+  $("resetProgressBtn").addEventListener("click", () => {
+    if (!confirm("Reset all saved quiz progress and mistake records on this browser?")) return;
+    stopTimer();
+    saved = {answered:0,correct:0,attempts:{},mistakes:[],session:null};
+    save(); renderStats();
+  });
+  populateTopics();
+  renderStats();
+  if (bank().length) {
+    $("resumeBtn").disabled = !saved.session;
+  }
+})();
 </script>
 </body>
 </html>
