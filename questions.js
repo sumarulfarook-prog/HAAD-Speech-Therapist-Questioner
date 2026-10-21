@@ -229,44 +229,21 @@ const QUESTION_BANK = [
   }
 ];
 
-/*
- * Basic bank integrity checks.
- * These messages appear in the browser developer console.
- */
-(() => {
-  const ids = QUESTION_BANK.map(q => q.id);
-  const duplicateIds = ids.filter((id, i) => ids.indexOf(id) !== i);
-  const invalid = QUESTION_BANK.filter(q =>
-    !q.id ||
-    !["Easy","Moderate","Hard"].includes(q.difficulty) ||
-    !q.topic ||
-    !q.question ||
-    !Array.isArray(q.options) ||
-    q.options.length !== 4 ||
-    !Number.isInteger(q.answer) ||
-    q.answer < 0 ||
-    q.answer > 3 ||
-    !q.explanation
-  );
 
-  console.info("Speech Therapist question bank:", QUESTION_BANK.length, "questions");
-  console.info("Difficulty totals:", {
-    Easy: QUESTION_BANK.filter(q => q.difficulty === "Easy").length,
-    Moderate: QUESTION_BANK.filter(q => q.difficulty === "Moderate").length,
-    Hard: QUESTION_BANK.filter(q => q.difficulty === "Hard").length
-  });
-
-  if (duplicateIds.length) console.error("Duplicate question IDs:", duplicateIds);
-  if (invalid.length) console.error("Invalid question entries:", invalid);
-})();
-
-  // ===== EASY: ST031–ST050 =====
+     // ===== EASY: ST031–ST050 =====
   {
-    id:"ST031",difficulty:"Easy",topic:"Anatomy and Physiology",
-    question:"Which structure primarily carries air from the larynx toward the lungs?",
-    options:["Oesophagus","Trachea","Hard palate","Tongue"],
-    answer:1,
-    explanation:"The trachea carries air from the larynx toward the bronchi. The oesophagus carries food and liquid toward the stomach."
+    id: "ST031",
+    difficulty: "Easy",
+    topic: "Anatomy and Physiology",
+    question: "Which structure primarily carries air from the larynx toward the lungs?",
+    options: [
+      "Oesophagus",
+      "Trachea",
+      "Hard palate",
+      "Tongue"
+    ],
+    answer: 1,
+    explanation: "The trachea carries air from the larynx toward the bronchi. The oesophagus carries food and liquid toward the stomach."
   },
   {
     id:"ST032",difficulty:"Easy",topic:"Anatomy and Physiology",
