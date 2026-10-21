@@ -716,7 +716,7 @@ const QUESTION_BANK = [
     options:["Apply the technique because any published study guarantees benefit","Reject all research and rely only on habit","Choose the technique based only on popularity","Integrate available evidence with clinical expertise, client values, context, and monitoring of individual outcomes"],
     answer:3,
     explanation:"Evidence-based practice integrates research evidence, clinical expertise, and client values and circumstances. Treatment selection should be individualised and outcomes monitored."
-  }
+  },
 
   // ===== EASY: ST091–ST110 =====
   {
