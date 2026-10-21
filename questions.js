@@ -8100,7 +8100,7 @@ const QUESTION_BANK = [
     options: ["Use one preferred treatment for every client", "Promise guaranteed outcomes", "Ignore the client's goals when choosing treatment", "Integrate evidence, clinical judgment, informed client preferences, and ongoing outcome monitoring"],
     answer: 3,
     explanation: "Ethical evidence-based care combines research, professional expertise, client values, and ongoing evaluation of outcomes."
-  },
+  }
 ];
 
-window.questions = questions;
+window.QUESTION_BANK = QUESTION_BANK;
