@@ -4,59 +4,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#123b5d">
+<meta name="theme-color" content="#123b59">
 <title>Speech Therapist Exam Practice</title>
 <style>
-:root{--navy:#123b5d;--blue:#1769aa;--bg:#f3f6fa;--green:#18794e;--red:#b42318}
+:root{--blue:#123b59;--light:#eef5fa;--green:#197548;--red:#b42318}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:#202b38;line-height:1.5}
-header{background:var(--navy);color:white;padding:24px 16px;text-align:center}
-header h1{margin:0;font-size:24px}
-header p{margin:7px 0 0;color:#e1edf7}
-main{max-width:850px;margin:20px auto;padding:0 14px}
-.panel{background:white;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 3px 14px #132f4c0d}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fa;color:#172b3a;line-height:1.5}
+header{background:var(--blue);color:white;padding:24px 16px;text-align:center}
+header h1{margin:0 0 6px;font-size:clamp(23px,5vw,32px)}
+header p{margin:0;color:#e0edf6}
+main{max-width:850px;margin:auto;padding:16px}
+.panel{background:white;padding:18px;border-radius:14px;margin:14px 0;box-shadow:0 2px 10px #102f4510}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stat{background:#edf4fa;border-radius:10px;padding:12px;text-align:center}
-.stat strong{display:block;font-size:23px;color:var(--navy)}
-label{font-weight:bold;display:block;margin-bottom:7px}
-select,button{font:inherit}
-select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;background:white}
-button{cursor:pointer;border:0;border-radius:9px;padding:12px 16px;font-weight:bold}
-.primary{background:var(--blue);color:white}
-.secondary{background:#e7eef5;color:var(--navy)}
-button:disabled{opacity:.65;cursor:default}
-#question{font-size:19px;font-weight:bold;margin:12px 0 18px}
-.option{display:block;width:100%;text-align:left;margin:9px 0;background:#f5f7fa;border:1px solid #dbe3eb;padding:13px;border-radius:9px;color:#202b38}
-.option:hover:not(:disabled){border-color:var(--blue);background:#edf6ff}
-.option.correct{background:#e7f7ed;border-color:var(--green)}
-.option.wrong{background:#fff0ef;border-color:var(--red)}
-#feedback{padding:13px;border-radius:9px;margin-top:14px}
-#feedback:empty{display:none}
-.good{background:#e7f7ed;color:#145b39}
-.bad{background:#fff0ef;color:#8e2018}
-.muted{color:#657487;font-size:14px}
-.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.row button{flex:1}
-.progress{height:8px;background:#e3eaf1;border-radius:10px;overflow:hidden;margin:10px 0}
-#bar{height:100%;width:0;background:#2381c4;transition:width .2s}
-.hidden{display:none}
-footer{text-align:center;color:#64748b;font-size:13px;padding:15px}
+.stat{text-align:center;background:var(--light);padding:12px 5px;border-radius:10px}
+.stat strong{display:block;font-size:24px;color:var(--blue)}
+label{display:block;font-weight:bold;margin:12px 0 5px}
+select,button{font:inherit;border-radius:9px;padding:11px}
+select{width:100%;border:1px solid #bbc9d4;background:white}
+button{border:0;cursor:pointer;background:var(--blue);color:white;font-weight:bold}
+button:disabled{opacity:.4;cursor:not-allowed}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.actions button{flex:1}
+.secondary{background:#e5edf4;color:var(--blue)}
+.option{display:block;width:100%;text-align:left;margin:9px 0;background:#f5f8fb;color:#17354a;border:2px solid #d9e3eb;font-weight:normal}
+.option:hover:not(:disabled){border-color:#648da9}
+.option.correct{background:#e0f5e8;border-color:#248650}
+.option.wrong{background:#fde8e7;border-color:#c43d35}
+#feedback{padding:12px;border-radius:9px;margin-top:12px}
+.good{background:#e0f5e8;color:#145c36}
+.bad{background:#fde8e7;color:#8d211b}
+.muted{color:#5d6e7a;font-size:14px}
+.progress{height:8px;background:#e2eaf0;border-radius:10px;overflow:hidden}
+#progressBar{height:100%;width:0;background:#23865a}
+.hidden{display:none!important}
+footer{text-align:center;color:#637381;padding:25px;font-size:13px}
 </style>
 </head>
 <body>
 <header>
 <h1>Speech Therapist Exam Practice</h1>
-<p>HAAD / DOH-style preparation • Learn one question at a time</p>
+<p>100 original HAAD / DOH-style preparation questions</p>
 </header>
 <main>
 <section class="panel">
-<h2 style="margin-top:0">Your study dashboard</h2>
+<h2>Your progress</h2>
 <div class="stats">
-<div class="stat"><strong id="attempts">0</strong><span class="muted">Answered</span></div>
-<div class="stat"><strong id="correctCount">0</strong><span class="muted">Correct</span></div>
-<div class="stat"><strong id="accuracy">0%</strong><span class="muted">Accuracy</span></div>
+<div class="stat"><strong id="attempted">0</strong><span>Answered</span></div>
+<div class="stat"><strong id="correctCount">0</strong><span>Correct</span></div>
+<div class="stat"><strong id="accuracy">0%</strong><span>Accuracy</span></div>
 </div>
 <p class="muted">Your progress is saved in this browser on this device.</p>
+<div class="progress"><div id="progressBar"></div></div>
 <label for="topic">Choose a topic</label>
 <select id="topic">
 <option value="All">All topics</option>
@@ -71,143 +69,256 @@ footer{text-align:center;color:#64748b;font-size:13px;padding:15px}
 <option>Evidence-Based Practice</option>
 <option>Ethics & Clinical Practice</option>
 </select>
-<div class="row">
-<button class="primary" id="start">Start / Restart Practice</button>
-<button class="secondary" id="review">Review Incorrect Answers</button>
+<div class="actions">
+<button id="start">Start / Restart Practice</button>
+<button id="review" class="secondary">Review Incorrect</button>
+<button id="mock" class="secondary">Mock Test (20)</button>
 </div>
 </section>
 
 <section class="panel" id="quiz">
-<div class="muted" id="position">Choose a topic and start practising.</div>
-<div class="progress"><div id="bar"></div></div>
-<div id="question">Your first question will appear here.</div>
+<p class="muted" id="position">Question 1</p>
+<h2 id="question">Select Start Practice to begin.</h2>
 <div id="options"></div>
-<div id="feedback" aria-live="polite"></div>
-<div class="row">
-<button class="secondary" id="prev" disabled>Previous</button>
-<button class="primary" id="next" disabled>Next Question</button>
+<div id="feedback" class="hidden"></div>
+<div class="actions">
+<button id="previous" class="secondary">Previous</button>
+<button id="next">Next Question</button>
 </div>
 </section>
 
 <section class="panel hidden" id="results">
-<h2>Practice complete!</h2>
+<h2>Practice complete</h2>
 <p id="resultText"></p>
-<button class="primary" id="again">Practise Again</button>
+<button id="again">Practise Again</button>
 </section>
-<footer>
-For educational practice only. This website is not affiliated with HAAD, DOH, or any licensing authority.
-</footer>
 </main>
+<footer>
+For educational preparation only. Not an official HAAD/DOH examination or a substitute for clinical training.
+</footer>
 
 <script>
 const questions = [
-{t:"Anatomy & Physiology",q:"Which cranial nerve primarily controls most movements of the tongue?",o:["Trigeminal nerve (V)","Facial nerve (VII)","Hypoglossal nerve (XII)","Vagus nerve (X)"],a:2,e:"The hypoglossal nerve (CN XII) supplies most intrinsic and extrinsic tongue muscles."},
-{t:"Anatomy & Physiology",q:"Which structure separates the oral cavity from the nasal cavity during normal swallowing?",o:["Epiglottis alone","Soft palate elevating against the pharyngeal wall","Vocal folds opening","Tongue tip contacting the teeth"],a:1,e:"Elevation of the soft palate helps close the velopharyngeal port during swallowing."},
-{t:"Anatomy & Physiology",q:"Which cranial nerve provides the main motor innervation to the muscles of facial expression?",o:["CN V","CN VII","CN IX","CN XII"],a:1,e:"The facial nerve (CN VII) innervates the muscles of facial expression."},
-{t:"Anatomy & Physiology",q:"The vocal folds are located in the:",o:["Pharynx","Larynx","Nasopharynx","Oral cavity"],a:1,e:"The vocal folds are housed within the larynx and vibrate during voiced sound production."},
-{t:"Anatomy & Physiology",q:"Which term describes the study of speech sound production and acoustic properties?",o:["Pragmatics","Phonetics","Morphology","Syntax"],a:1,e:"Phonetics studies how speech sounds are produced, transmitted, and perceived."},
-{t:"Anatomy & Physiology",q:"Which cranial nerve carries much of the motor supply for the pharynx and larynx?",o:["CN II","CN V","CN X","CN XII"],a:2,e:"The vagus nerve (CN X), including its branches, is important for pharyngeal and laryngeal motor function."},
-{t:"Language Development",q:"Which is an example of expressive language?",o:["Following a spoken instruction","Pointing after hearing a word","Naming a pictured object","Looking toward a sound"],a:2,e:"Expressive language is how a person communicates ideas using words, signs, or other language forms."},
-{t:"Language Development",q:"Understanding the meaning of words is primarily part of:",o:["Semantics","Phonology","Articulation","Voice"],a:0,e:"Semantics concerns word and sentence meaning."},
-{t:"Language Development",q:"Which assessment approach is especially useful for understanding a child's language in everyday contexts?",o:["Speech audiometry alone","Language sample analysis","Oral motor examination alone","Pure-tone screening alone"],a:1,e:"A language sample reveals how a child uses language spontaneously in connected communication."},
-{t:"Language Development",q:"The rules governing how words combine into sentences are called:",o:["Phonetics","Syntax","Prosody","Voice quality"],a:1,e:"Syntax describes sentence structure and word-order rules."},
-{t:"Language Development",q:"A child consistently has difficulty understanding spoken instructions. What should the clinician do first?",o:["Assume a language disorder without testing","Gather history and assess receptive language and hearing as appropriate","Begin voice therapy","Recommend surgery"],a:1,e:"A comprehensive assessment considers history, hearing, receptive language, and other relevant factors."},
-{t:"Speech Sound Disorders",q:"Replacing /k/ with /t/ in a word is an example of:",o:["Fronting","Backing","Gliding","Voicing"],a:0,e:"Fronting occurs when a sound made farther back in the mouth is replaced by one made farther forward."},
-{t:"Speech Sound Disorders",q:"Which term describes difficulty planning and programming speech movements despite adequate muscle strength?",o:["Dysarthria","Childhood apraxia of speech","Aphasia","Dysphagia"],a:1,e:"Childhood apraxia of speech is a motor-planning/programming disorder, not primarily a weakness disorder."},
-{t:"Speech Sound Disorders",q:"A phonological process is best described as:",o:["A pattern affecting classes of speech sounds","A hearing test result","A swallowing reflex","A voice pitch measure"],a:0,e:"Phonological processes are systematic patterns used in speech sound production."},
-{t:"Speech Sound Disorders",q:"Which task most directly samples a child's production of individual consonants in words?",o:["Pure-tone audiometry","Articulation assessment","Cognitive screening alone","Voice range profile"],a:1,e:"An articulation assessment samples speech sound production across relevant contexts."},
-{t:"Aphasia & Motor Speech",q:"A person has effortful, nonfluent speech but relatively better comprehension. Which aphasia pattern may fit?",o:["Broca-type aphasia","Wernicke-type aphasia","Pure word deafness in every case","No language impairment is possible"],a:0,e:"Broca-type aphasia often involves nonfluent, effortful output; a full assessment is needed to characterize the profile."},
-{t:"Aphasia & Motor Speech",q:"Dysarthria primarily results from impairment in:",o:["Motor execution for speech","Word meaning alone","Reading comprehension alone","Hearing sensitivity alone"],a:0,e:"Dysarthria arises from neuromuscular impairments affecting speech execution."},
-{t:"Aphasia & Motor Speech",q:"Which activity is an example of functional communication treatment for an adult with aphasia?",o:["Practising a real-life conversation about arranging an appointment","Only memorizing unrelated lists indefinitely","Avoiding all communication tasks","Testing hearing only"],a:0,e:"Functional treatment targets meaningful communication in daily situations."},
-{t:"Aphasia & Motor Speech",q:"Which feature is commonly associated with apraxia of speech?",o:["Consistent muscle weakness as the defining feature","Difficulty planning speech movements and sound sequencing","Loss of hearing in every case","Excessive saliva as the sole sign"],a:1,e:"Apraxia of speech involves impaired planning/programming of speech movements."},
-{t:"Fluency, Voice & Resonance",q:"Stuttering may include:",o:["Sound repetitions, prolongations, or blocks","Only reduced hearing thresholds","Only difficulty chewing","Only reduced vocabulary"],a:0,e:"Common stuttering features include repetitions, prolongations, and blocks."},
-{t:"Fluency, Voice & Resonance",q:"Persistent hoarseness should prompt consideration of:",o:["Laryngeal evaluation by an appropriate medical professional","Ignoring symptoms indefinitely","Tongue strengthening without assessment","Hearing aid fitting automatically"],a:0,e:"Persistent voice changes may require medical evaluation of the larynx before or alongside voice therapy."},
-{t:"Fluency, Voice & Resonance",q:"Hypernasal speech is commonly associated with:",o:["Excessive nasal resonance on oral sounds","Reduced hearing sensitivity only","Slow chewing only","A vocabulary deficit in every case"],a:0,e:"Hypernasality reflects excessive nasal resonance, often related to velopharyngeal dysfunction."},
-{t:"Fluency, Voice & Resonance",q:"Which measure is most directly related to perceived vocal pitch?",o:["Fundamental frequency","Vital capacity alone","Word-finding latency","Tongue pressure alone"],a:0,e:"Fundamental frequency is an acoustic correlate of perceived pitch."},
-{t:"Autism & AAC",q:"AAC stands for:",o:["Augmentative and Alternative Communication","Auditory Assessment Calibration","Applied Articulation Counting","Automatic Airway Closure"],a:0,e:"AAC includes communication methods that supplement or replace spoken communication."},
-{t:"Autism & AAC",q:"When introducing AAC, the clinician should generally:",o:["Wait until all speech therapy has failed","Consider communication needs and provide access with appropriate partner support","Restrict the system to testing sessions","Remove other communication methods"],a:1,e:"AAC can support communication alongside speech and should be individualized and accessible."},
-{t:"Autism & AAC",q:"Which approach supports social communication intervention for an autistic child?",o:["Individualize goals around meaningful participation and the child's needs","Require eye contact as the sole measure of success","Ignore family priorities","Use the same goals for every child"],a:0,e:"Intervention should be individualized, respectful, functional, and guided by the person's needs and priorities."},
-{t:"Dysphagia & Feeding",q:"Dysphagia means difficulty with:",o:["Swallowing","Hearing","Spelling","Voice pitch only"],a:0,e:"Dysphagia is a swallowing disorder that may affect safety or efficiency."},
-{t:"Dysphagia & Feeding",q:"Which finding can be a possible sign of swallowing difficulty?",o:["Coughing during meals","Improved handwriting","A higher reading score","Clear speech in every situation"],a:0,e:"Coughing during meals can indicate swallowing difficulty, although aspiration may also occur without coughing."},
-{t:"Dysphagia & Feeding",q:"Which instrumental examination can visualize swallowing physiology using X-ray and contrast material?",o:["Videofluoroscopic swallow study (VFSS)","Pure-tone audiometry","Electrocardiogram","Standard spirometry alone"],a:0,e:"VFSS records swallowing with X-ray as the person swallows contrast-containing materials."},
-{t:"Dysphagia & Feeding",q:"A patient develops sudden choking and breathing difficulty during a meal. What is the priority?",o:["Continue the meal slowly","Follow emergency response procedures and address airway/breathing immediately","Complete a language test first","Offer more food"],a:1,e:"Airway and breathing emergencies require immediate action under local emergency protocols."},
-{t:"Hearing & Early Intervention",q:"What is the main purpose of a hearing screening?",o:["Identify people who may need further hearing assessment","Diagnose every communication disorder","Measure vocabulary only","Assess swallowing safety"],a:0,e:"Screening identifies possible hearing concerns; a diagnostic assessment is needed when indicated."},
-{t:"Hearing & Early Intervention",q:"When a child has suspected hearing loss and language delay, the best next step is generally to:",o:["Arrange appropriate hearing evaluation and coordinate developmental assessment","Wait several years without follow-up","Assume the child is not interested in communication","Begin treatment without gathering information"],a:0,e:"Early identification and coordinated assessment support timely intervention."},
-{t:"Evidence-Based Practice",q:"Evidence-based practice integrates:",o:["Research evidence, clinical expertise, and client values and context","Research papers alone","Personal opinion alone","One fixed treatment for all clients"],a:0,e:"Evidence-based practice combines the best available evidence, clinician expertise, and client preferences and circumstances."},
-{t:"Evidence-Based Practice",q:"Why should treatment goals be measurable?",o:["To monitor progress and judge whether intervention is helping","To avoid communicating with families","To eliminate reassessment","To guarantee identical outcomes"],a:0,e:"Measurable goals support objective progress monitoring and treatment decisions."},
-{t:"Evidence-Based Practice",q:"A clinician finds that a treatment is not producing expected progress. What is an appropriate response?",o:["Continue unchanged forever","Review data, reassess relevant factors, and modify the plan as appropriate","Stop documenting outcomes","Blame the client"],a:1,e:"Clinical decisions should respond to outcome data, reassessment, and the client's needs."},
-{t:"Ethics & Clinical Practice",q:"Before beginning an assessment or intervention, the clinician should normally:",o:["Obtain informed consent as required and explain the process","Promise a guaranteed cure","Share records publicly","Skip explaining the purpose"],a:0,e:"Informed consent includes appropriate information about the service, risks, benefits, and choices."},
-{t:"Ethics & Clinical Practice",q:"How should confidential clinical information be handled?",o:["Share it freely with friends","Protect it and disclose only as authorized or legally permitted/required","Post it online without identifiers being checked","Send it to anyone who asks"],a:1,e:"Clinicians must protect confidentiality and follow applicable law, professional standards, and consent requirements."},
-{t:"Ethics & Clinical Practice",q:"A clinician is asked to treat a condition outside their competence. What should they do?",o:["Proceed without support","Seek appropriate supervision, training, referral, or consultation","Invent credentials","Avoid telling the client anything"],a:1,e:"Clinicians should practise within their competence and arrange appropriate support or referral."}
+["Anatomy & Physiology","Which cranial nerve primarily controls most movements of the tongue?",["V","VII","XII","VIII"],2,"The hypoglossal nerve (CN XII) supplies most intrinsic and extrinsic tongue muscles."],
+["Anatomy & Physiology","Which cranial nerve carries most motor innervation to the muscles of facial expression?",["V","VII","IX","XII"],1,"The facial nerve (CN VII) innervates the muscles of facial expression."],
+["Anatomy & Physiology","Which structure separates the oral cavity from the nasal cavity during swallowing?",["Hard palate only","Soft palate elevating against the pharyngeal wall","Vocal folds","Epiglottis alone"],1,"Velopharyngeal closure helps prevent food or liquid from entering the nasal cavity."],
+["Anatomy & Physiology","Which structure contains the vocal folds?",["Pharynx","Larynx","Trachea","Esophagus"],1,"The vocal folds are located within the larynx."],
+["Anatomy & Physiology","What is the main respiratory source of energy for typical voiced speech?",["Air expelled from the lungs","Air in the stomach","Tongue movement alone","Middle-ear pressure"],0,"Pulmonary airflow provides the energy for phonation and speech."],
+["Anatomy & Physiology","Which cranial nerve is most closely associated with hearing and balance?",["I","V","VIII","XII"],2,"The vestibulocochlear nerve (CN VIII) carries auditory and vestibular information."],
+["Anatomy & Physiology","What is the main function of the vocal folds during phonation?",["Filter sound in the nose","Vibrate as air passes through the glottis","Move the jaw","Transmit sound through the middle ear"],1,"Vocal-fold vibration generates the primary sound source for voiced speech."],
+["Anatomy & Physiology","Which structure is primarily responsible for moving food from the mouth into the pharynx during the oral phase?",["Tongue","Cochlea","Vocal folds","Eustachian tube"],0,"Tongue movement helps form and propel the bolus posteriorly."],
+["Anatomy & Physiology","Which part of the ear converts sound vibrations into neural signals?",["Pinna","Ossicles","Cochlea","Eustachian tube"],2,"Hair cells in the cochlea transduce mechanical vibration into neural activity."],
+["Anatomy & Physiology","Which term describes the perceived frequency of a sound?",["Loudness","Pitch","Resonance","Articulation"],1,"Pitch is the perceptual correlate of fundamental frequency."],
+
+["Language Development","Which communication behaviour typically emerges earliest in infancy?",["Complex narratives","Intentional pointing and gestures","Written sentences","Metalinguistic reasoning"],1,"Gestures and early intentional communication precede complex spoken language."],
+["Language Development","A child says 'goed' instead of 'went'. This is an example of:",["Overregularization","Echolalia","Dysarthria","Cluttering"],0,"The child applies a regular past-tense rule to an irregular verb."],
+["Language Development","Which is a receptive-language skill?",["Following a spoken instruction","Producing a narrative","Naming a picture aloud","Repeating a sentence"],0,"Receptive language concerns understanding spoken or written language."],
+["Language Development","Which is an expressive-language task?",["Identifying a named object","Following 'give me the ball'","Describing a picture","Responding to a sound alone"],2,"Describing a picture requires generating language."],
+["Language Development","A language sample is particularly useful for assessing:",["Functional spontaneous communication","Only hearing thresholds","Only oral muscle strength","Only lung volume"],0,"Language samples reveal spontaneous vocabulary, grammar, and discourse use."],
+["Language Development","Joint attention refers to:",["Two people attending to the same object or event","A child speaking two languages","Repeating another person's words","Taking turns only in written tasks"],0,"Joint attention involves sharing attention with another person toward an object or event."],
+["Language Development","Which approach best supports language learning during play?",["Responsive interaction and language modelling","Repeated correction of every error","Avoiding child-led interests","Testing without interaction"],0,"Responsive modelling within meaningful play supports communication and language."],
+["Language Development","A child with difficulty understanding word meanings may have a weakness in:",["Semantics","Phonation","Respiration","Auditory reflexes only"],0,"Semantics concerns meaning in language."],
+["Language Development","Which is an example of a pragmatic skill?",["Taking conversational turns","Producing /s/ accurately","Increasing vocal loudness","Swallowing safely"],0,"Pragmatics concerns the social use of communication."],
+["Language Development","When assessing a multilingual child, the clinician should:",["Assess only English and assume impairment if scores are low","Consider language exposure and skills across languages","Discourage the home language","Use monolingual norms without caution"],1,"Assessment should consider language history, exposure, and abilities across languages."],
+
+["Speech Sound Disorders","Which term refers to a predictable sound pattern used by a child that simplifies adult speech forms?",["Phonological process","Aphasia","Apraxia","Dysphonia"],0,"Phonological processes are patterns that simplify speech sound structures."],
+["Speech Sound Disorders","A frontal lisp most commonly affects production of:",["/s/ and /z/","/m/ and /n/","/k/ and /g/ only","Vowels only"],0,"A frontal lisp commonly involves forward tongue placement for sibilants."],
+["Speech Sound Disorders","Which assessment best examines speech sound accuracy in single words?",["Standardized articulation test or structured word sample","Pure-tone audiogram alone","Swallow study","Voice range profile alone"],0,"Structured word elicitation allows analysis of consonant production."],
+["Speech Sound Disorders","Intelligibility refers to:",["How much of a speaker's message a listener understands","How loud a voice is","How long a person can hold a breath","How well a person hears music"],0,"Intelligibility is the degree to which speech is understood by a listener."],
+["Speech Sound Disorders","Minimal-pair therapy is commonly used to address:",["Phonological contrasts","Vocal-fold paralysis","Hearing thresholds","Swallowing aspiration"],0,"Minimal pairs contrast words differing by one phoneme to highlight meaning differences."],
+["Speech Sound Disorders","A child consistently replaces /k/ with /t/. This is best described as:",["Fronting","Backing","Gliding","Final consonant deletion"],0,"Fronting substitutes a front sound such as /t/ for a velar sound such as /k/."],
+["Speech Sound Disorders","Which is a typical example of final consonant deletion?",["'ca' for 'cat'","'tat' for 'cat'","'wabbit' for 'rabbit'","'poon' for 'spoon'"],0,"The final /t/ is omitted in 'ca' for 'cat'."],
+["Speech Sound Disorders","What is the main goal of articulation therapy?",["Improve accurate production of targeted speech sounds","Increase reading speed only","Eliminate all dialect features","Improve swallowing without assessment"],0,"Articulation therapy targets accurate production and generalisation of speech sounds."],
+["Speech Sound Disorders","Which factor should be considered when interpreting a child's speech errors?",["Age, language background, and dialect","Only the child's height","Handwriting speed alone","Preference for toys only"],0,"Development, dialect, multilingual experience, and context affect interpretation."],
+["Speech Sound Disorders","Stimulability testing examines whether a client can:",["Produce a target sound with cues or models","Hear every frequency normally","Read complex text","Swallow thin liquids"],0,"Stimulability measures ability to produce a sound with support."],
+
+["Aphasia & Motor Speech","Aphasia is most commonly associated with damage to:",["Language networks in the brain","The external ear only","The vocal folds only","The jaw joint only"],0,"Aphasia is an acquired language disorder following brain damage."],
+["Aphasia & Motor Speech","A person with nonfluent aphasia often demonstrates:",["Effortful, reduced verbal output","Fluent speech with no comprehension difficulty in every case","Only hearing loss","Isolated swallowing difficulty with normal language"],0,"Nonfluent aphasia commonly features reduced, effortful speech; profiles vary."],
+["Aphasia & Motor Speech","Dysarthria is primarily a disorder of:",["Motor execution of speech","Word meaning only","Reading comprehension only","Hearing sensitivity"],0,"Dysarthria results from impaired neuromuscular execution of speech."],
+["Aphasia & Motor Speech","Apraxia of speech is primarily associated with difficulty in:",["Planning or programming speech movements","Understanding all written words","Detecting high-frequency sounds","Producing saliva"],0,"Apraxia of speech involves impaired planning/programming of speech movements."],
+["Aphasia & Motor Speech","Which feature may occur in apraxia of speech?",["Inconsistent sound errors and groping","Only reduced hearing thresholds","Always normal prosody","No difficulty with speech sequencing"],0,"Inconsistent errors, articulatory groping, and disrupted prosody can occur."],
+["Aphasia & Motor Speech","Which approach can support functional communication after aphasia?",["Supported conversation and multimodal communication","Require speech-only responses in all situations","Avoid visual aids","Correct every grammatical error during every exchange"],0,"Writing, gesture, pictures, and partner strategies can support communication."],
+["Aphasia & Motor Speech","Which task directly assesses confrontation naming?",["Naming a pictured object","Following a swallowing diet","Sustaining a vowel only","Detecting a pure tone"],0,"Confrontation naming asks the client to name a presented object or picture."],
+["Aphasia & Motor Speech","What does dysarthria assessment commonly examine?",["Respiration, phonation, articulation, resonance, and prosody","Only vocabulary size","Only spelling","Only auditory thresholds"],0,"A motor-speech examination evaluates multiple speech subsystems."],
+["Aphasia & Motor Speech","Which statement about aphasia is most accurate?",["It can affect speaking, understanding, reading, and writing","It always affects intelligence globally","It is always caused by hearing loss","It only affects articulation"],0,"Aphasia can affect several language modalities, with variable patterns."],
+["Aphasia & Motor Speech","For a person with severe motor-speech limitations, the clinician should consider:",["Communication supports and AAC where appropriate","Withholding communication opportunities","Assuming comprehension is absent","Using only long spoken questions"],0,"AAC and supported communication may improve participation and autonomy."],
+
+["Fluency, Voice & Resonance","Stuttering commonly involves:",["Repetitions, prolongations, or blocks","Only incorrect vowel placement","Loss of hearing sensitivity","Swallowing residue"],0,"These are common core behaviours associated with stuttering."],
+["Fluency, Voice & Resonance","Cluttering may be associated with:",["Rapid or irregular rate and reduced clarity","Consistently slow, effortful speech only","Vocal-fold nodules in every case","Complete absence of language"],0,"Cluttering can involve irregular rate, excessive disfluencies, and reduced intelligibility."],
+["Fluency, Voice & Resonance","Dysphonia means:",["A voice disorder","A language comprehension disorder","A hearing threshold disorder","A swallowing reflex"],0,"Dysphonia describes impaired voice quality, pitch, loudness, or effort."],
+["Fluency, Voice & Resonance","Which professional is important when a persistent voice disorder needs medical examination?",["Otolaryngologist (ENT)","Optometrist","Dentist in every case","Physiotherapist only"],0,"Laryngeal examination by an appropriate medical professional may be indicated."],
+["Fluency, Voice & Resonance","Hypernasality is often associated with:",["Excessive nasal resonance on oral sounds","No airflow through the nose during nasal sounds","Low hearing thresholds","Tongue weakness in every case"],0,"Hypernasality reflects excessive nasal resonance, often due to velopharyngeal dysfunction."],
+["Fluency, Voice & Resonance","Which is a commonly recommended vocal hygiene behaviour?",["Maintain hydration and avoid vocal overuse","Shout to strengthen the voice daily","Smoke to reduce throat dryness","Whisper forcefully for long periods"],0,"Hydration and sensible voice use can support vocal health."],
+["Fluency, Voice & Resonance","Which measure is commonly used to describe vocal pitch acoustically?",["Fundamental frequency","Blood pressure","Respiratory rate only","Pure-tone average"],0,"Fundamental frequency (F0) is an acoustic correlate of perceived pitch."],
+["Fluency, Voice & Resonance","When supporting a child who stutters, clinicians should generally:",["Promote supportive communication and individualised goals","Punish repetitions","Tell the child to stop talking whenever stuttering occurs","Assume the child is not aware of stuttering"],0,"Supportive, individualised care avoids blame and considers communication impact."],
+["Fluency, Voice & Resonance","Which symptom warrants prompt medical assessment in a voice complaint?",["Persistent hoarseness, particularly with risk factors","A brief voice change after one loud event that resolves","Normal conversational voice","Occasional need to clear the throat after a cold"],0,"Persistent hoarseness needs assessment; urgency depends on duration and associated risk factors."],
+["Fluency, Voice & Resonance","Resonance is shaped mainly by the:",["Vocal tract cavities","Finger joints","Retina","Middle-ear bones alone"],0,"The oral, nasal, and pharyngeal cavities shape speech resonance."],
+
+["Autism & AAC","AAC stands for:",["Augmentative and Alternative Communication","Auditory Assessment Checklist","Automatic Articulation Correction","Applied Acoustic Control"],0,"AAC includes tools and strategies that supplement or replace spoken communication."],
+["Autism & AAC","Which is an example of aided AAC?",["A communication board","A spoken word alone","A natural facial expression alone","A head nod without equipment"],0,"A communication board is a low-tech aided AAC method."],
+["Autism & AAC","Which statement about AAC is supported by clinical practice?",["AAC can be introduced when needed and does not require a prerequisite age or skill","AAC must wait until speech therapy fails for years","AAC always prevents speech development","AAC is only for adults"],0,"AAC can support communication and may be used alongside spoken-language intervention."],
+["Autism & AAC","A core principle of autism-affirming communication support is to:",["Respect individual communication and sensory needs","Force eye contact as proof of attention","Ignore all self-advocacy","Assume every autistic person has the same profile"],0,"Support should be individualised and respectful of autonomy and sensory differences."],
+["Autism & AAC","A communication partner can support an AAC user by:",["Modelling use of the system during natural interaction","Keeping the device out of reach","Demanding a correct response before acknowledging communication","Using the system only during tests"],0,"Aided language modelling exposes the user to meaningful AAC use."],
+["Autism & AAC","Which is a possible function of echolalia?",["Communication, processing, or self-regulation depending on context","Proof that a person has no understanding","Always meaningless behaviour","A sign of hearing loss in every case"],0,"Echolalia can serve different functions and should be interpreted in context."],
+["Autism & AAC","When selecting AAC vocabulary, the team should prioritise:",["Useful words for varied daily communication and the individual's needs","Only nouns for naming objects","Only words adults prefer","Removing words that express refusal"],0,"AAC vocabulary should support broad communication, including requests, comments, and refusal."],
+["Autism & AAC","Which is an appropriate goal for social communication intervention?",["Improve meaningful participation in relevant interactions","Force every client to use identical eye contact","Eliminate harmless self-regulatory movements","Reward compliance regardless of distress"],0,"Goals should support functional communication, agency, and participation."],
+["Autism & AAC","A picture exchange system is best described as:",["An aided communication approach using pictures","A hearing screening method","A voice examination","A swallowing manoeuvre"],0,"Picture exchange is one form of aided communication intervention."],
+["Autism & AAC","What should a clinician do if an AAC device is unavailable temporarily?",["Provide an accessible backup communication method","Assume the person has nothing to say","Require speech only","Cancel all opportunities to communicate"],0,"A backup communication plan protects communication access."],
+
+["Dysphagia & Feeding","Dysphagia refers to difficulty with:",["Swallowing","Hearing","Voice pitch alone","Written language"],0,"Dysphagia is a swallowing disorder."],
+["Dysphagia & Feeding","Which finding can be a possible sign of swallowing difficulty?",["Coughing or choking during meals","Clear speech in all contexts","Normal appetite alone","Improved handwriting"],0,"Coughing or choking may signal swallowing difficulty, though aspiration can be silent."],
+["Dysphagia & Feeding","Which instrumental study uses X-ray video to observe swallowing?",["Videofluoroscopic swallow study (VFSS)","Pure-tone audiometry","Electroencephalography alone","Spirometry alone"],0,"VFSS uses dynamic X-ray imaging to assess swallowing physiology."],
+["Dysphagia & Feeding","FEES stands for:",["Flexible Endoscopic Evaluation of Swallowing","Functional Examination of Expressive Speech","Fluency Evaluation and Exercise Scale","Frequency Estimation of Ear Sounds"],0,"FEES uses a flexible endoscope to examine pharyngeal swallowing and related structures."],
+["Dysphagia & Feeding","Which action is appropriate before recommending a swallowing strategy?",["Assess the person and relevant swallowing risks","Prescribe thickened liquids to everyone","Assume no aspiration if there is no cough","Use one diet for all diagnoses"],0,"Recommendations should be individualised using assessment and clinical context."],
+["Dysphagia & Feeding","Aspiration occurs when material enters the:",["Airway below the level of the vocal folds","Stomach through the esophagus","Oral cavity from the lips","Nasal cavity only"],0,"Aspiration means material passes below the vocal folds into the airway."],
+["Dysphagia & Feeding","Why is oral care relevant for people at risk of aspiration?",["It may reduce harmful oral bacterial burden","It guarantees aspiration will never occur","It replaces swallowing assessment","It increases airway closure automatically"],0,"Good oral hygiene can reduce oral pathogen burden and may reduce pneumonia risk."],
+["Dysphagia & Feeding","Which sign can be associated with dehydration in a person with dysphagia?",["Reduced urine output and dry mouth","Improved hydration status","Normal fluid intake in every case","Increased hearing sensitivity"],0,"Reduced urine output and dry mouth can be signs of dehydration."],
+["Dysphagia & Feeding","What is the purpose of a clinical swallowing evaluation?",["Examine relevant history, oral function, and swallowing signs to guide care","Confirm all aspiration without exception","Replace instrumental assessment in every case","Measure only vocabulary"],0,"Clinical evaluation helps identify concerns and determine whether further assessment is needed."],
+["Dysphagia & Feeding","Which is the safest general principle when a patient shows acute choking with inability to breathe?",["Activate emergency response and provide appropriate choking first aid","Offer water immediately","Continue the meal","Wait for a routine clinic appointment"],0,"Severe airway obstruction is an emergency requiring immediate appropriate first aid."],
+
+["Hearing & Early Intervention","What does an audiogram display?",["Hearing thresholds across frequencies","Language sample length","Tongue strength","Swallowing timing only"],0,"An audiogram plots hearing thresholds at different frequencies."],
+["Hearing & Early Intervention","A child does not respond consistently to speech. What is an appropriate next step?",["Arrange hearing evaluation and assess communication development","Assume the child is inattentive","Begin voice therapy only","Wait indefinitely"],0,"Hearing status should be evaluated when listening concerns are present."],
+["Hearing & Early Intervention","What is the primary purpose of newborn hearing screening?",["Identify infants who need further hearing assessment","Diagnose every language disorder","Measure speech intelligibility","Test reading ability"],0,"Screening aims to identify infants who require diagnostic hearing assessment."],
+["Hearing & Early Intervention","Which device can help a person with hearing loss by amplifying sound?",["Hearing aid","Communication spoon","Laryngeal mask","Tongue depressor"],0,"Hearing aids amplify sound according to an individual's hearing needs."],
+["Hearing & Early Intervention","Why is early intervention important for children with hearing loss?",["It supports timely access to language and communication","It guarantees identical outcomes for every child","It eliminates the need for family involvement","It is useful only after school age"],0,"Early access to appropriate communication and language support is important."],
+["Hearing & Early Intervention","Which is a common behavioural hearing assessment method for infants?",["Visual reinforcement audiometry, when developmentally appropriate","Written spelling test","Maximum phonation time","Naming abstract pictures only"],0,"Visual reinforcement audiometry can assess hearing responses in young children."],
+["Hearing & Early Intervention","What is the role of the middle-ear ossicles?",["Transmit and help couple sound vibrations to the inner ear","Generate speech language","Control tongue movement","Produce cerebrospinal fluid"],0,"The malleus, incus, and stapes transmit vibration through the middle ear."],
+["Hearing & Early Intervention","Which communication approach should be chosen for a child with hearing loss?",["An informed, family-centred plan suited to the child and family's needs","One mandatory method for every child","Speech-only intervention without discussing options","No intervention until speech develops"],0,"Planning should be individualised, informed, and family-centred."],
+["Hearing & Early Intervention","A tympanometry test primarily provides information about:",["Middle-ear function and eardrum mobility","Word retrieval","Articulation accuracy","Lung capacity"],0,"Tympanometry measures middle-ear acoustic immittance."],
+["Hearing & Early Intervention","Which condition may cause conductive hearing loss?",["Middle-ear fluid","Cochlear hair-cell damage only","Cortical aphasia","Vocal-fold nodules"],0,"Middle-ear fluid can reduce sound transmission and cause conductive hearing loss."],
+
+["Evidence-Based Practice","Evidence-based practice integrates research evidence with:",["Clinical expertise and client values and circumstances","Research articles alone","Personal preference alone","The newest treatment regardless of evidence"],0,"Evidence-based practice combines best available evidence, expertise, and client values."],
+["Evidence-Based Practice","What is the purpose of baseline measurement before intervention?",["Document current performance for comparison","Guarantee improvement","Replace goal setting","Avoid reassessment"],0,"Baseline data allow change to be measured over time."],
+["Evidence-Based Practice","A treatment outcome should ideally be measured using:",["Relevant, reliable measures linked to functional goals","Clinician memory alone","An unrelated test","A single impression without documentation"],0,"Outcome measures should reflect the treatment target and be sufficiently reliable."],
+["Evidence-Based Practice","What does sensitivity describe in a diagnostic test?",["The proportion of people with the condition who test positive","The proportion without the condition who test negative","The test's cost only","The number of clinicians involved"],0,"Sensitivity is the true-positive rate."],
+["Evidence-Based Practice","What does specificity describe in a diagnostic test?",["The proportion without the condition who test negative","The proportion with the condition who test positive","The length of a clinical session","The cost of treatment"],0,"Specificity is the true-negative rate."],
+["Evidence-Based Practice","Why should clinicians monitor treatment progress regularly?",["To judge response and adjust the plan when needed","To avoid changing ineffective treatment","To ensure all clients receive identical sessions","To replace informed consent"],0,"Progress monitoring supports data-informed clinical decisions."],
+["Evidence-Based Practice","A systematic review aims to:",["Systematically identify and synthesise relevant studies","Describe one patient's experience only","Replace all clinical judgement","Guarantee every included study is high quality"],0,"Systematic reviews use explicit methods to identify and synthesise evidence."],
+["Evidence-Based Practice","What is a clinically meaningful outcome?",["A change that matters to the person's daily functioning or goals","Any statistically significant change regardless of impact","A score unrelated to the referral concern","A change chosen only for convenience"],0,"Meaningful outcomes connect to function, participation, or client priorities."],
+["Evidence-Based Practice","When research evidence is limited, a clinician should:",["Use transparent clinical reasoning, discuss uncertainty, and monitor outcomes","Claim the treatment is proven","Ignore client preferences","Stop documenting decisions"],0,"Uncertainty should be acknowledged and decisions made carefully and transparently."],
+["Evidence-Based Practice","Which is an example of a measurable therapy goal?",["The client will produce the target sound accurately in 8 of 10 trials across three sessions","The client will speak better","The client will improve soon","The client will try harder"],0,"A measurable goal specifies a target and a criterion for performance."],
+
+["Ethics & Clinical Practice","What is informed consent?",["Voluntary agreement after understandable information about the proposed service","A signature obtained without explanation","Permission from any available person regardless of capacity or authority","A guarantee of successful treatment"],0,"Consent requires relevant information, understanding, and voluntariness."],
+["Ethics & Clinical Practice","How should a clinician handle confidential patient information?",["Share it only with authorised people for legitimate purposes, subject to applicable law","Discuss it publicly without names","Send records to anyone who asks","Post case details on social media"],0,"Confidentiality must be maintained according to professional duties and applicable law."],
+["Ethics & Clinical Practice","What should a clinician do if a case is outside their competence?",["Seek supervision, training, or an appropriate referral","Proceed without informing anyone","Hide the limitation","Guarantee an outcome"],0,"Clinicians should practise within competence and obtain appropriate support or referral."],
+["Ethics & Clinical Practice","Which is an example of person-centred care?",["Collaborating with the client on goals relevant to their life","Setting goals without discussion in every case","Ignoring cultural and language preferences","Prioritising convenience over safety"],0,"Person-centred care respects the client's priorities, preferences, and context."],
+["Ethics & Clinical Practice","What is the purpose of clinical documentation?",["Record assessment, decisions, services, outcomes, and relevant communication","Record only successful sessions","Replace direct communication with the care team","Store opinions without clinical relevance"],0,"Clear records support continuity, accountability, and safe care."],
+["Ethics & Clinical Practice","When using an interpreter, the clinician should generally:",["Address the client directly and use a qualified interpreter when appropriate","Speak only to the interpreter","Assume a family member is always suitable","Avoid checking understanding"],0,"Direct engagement with the client supports respectful, accurate communication."],
+["Ethics & Clinical Practice","If a clinician suspects immediate danger to a patient, the clinician should:",["Follow emergency and safeguarding procedures appropriate to the situation","Ignore it unless the patient complains again","Share the story casually with colleagues","Delay all action until the next routine visit"],0,"Urgent risks require prompt action under applicable safety and safeguarding procedures."],
+["Ethics & Clinical Practice","Which is appropriate when a client declines a recommended intervention?",["Explore concerns, explain options, respect autonomy, and document appropriately","Force the intervention","End all communication immediately","Alter the record to show consent"],0,"Respect for autonomy includes discussing alternatives and documenting decisions."],
+["Ethics & Clinical Practice","A professional boundary helps to:",["Maintain a safe, respectful therapeutic relationship","Allow clinicians to use patients for personal benefit","Remove the need for consent","Guarantee a particular outcome"],0,"Professional boundaries protect clients and preserve the therapeutic relationship."],
+["Ethics & Clinical Practice","Which action best supports culturally responsive practice?",["Ask about the person's language, communication preferences, and relevant cultural context","Assume everyone from one culture communicates identically","Treat dialect differences automatically as disorders","Avoid involving the client in decisions"],0,"Culturally responsive care avoids assumptions and considers the individual." ]
 ];
 
 const $ = id => document.getElementById(id);
-let session = [], index = 0, answered = {};
-let stats = JSON.parse(localStorage.getItem("speechPracticeStats") || '{"attempts":0,"correct":0,"wrong":[]}');
-function saveStats(){localStorage.setItem("speechPracticeStats",JSON.stringify(stats));updateStats();}
-function updateStats(){
-$("attempts").textContent=stats.attempts;
-$("correctCount").textContent=stats.correct;
-$("accuracy").textContent=stats.attempts?Math.round(stats.correct/stats.attempts*100)+"%":"0%";
+const STORE = "speechPractice100_v1";
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch(e) {}
+if (!saved.answers) saved.answers = {};
+if (!saved.incorrect) saved.incorrect = [];
+let list = questions.map((q,i)=>i);
+let current = 0;
+let mode = "all";
+let finished = false;
+
+function persist(){
+ try { localStorage.setItem(STORE,JSON.stringify(saved)); } catch(e) {}
+ updateStats();
 }
-function startPractice(reviewOnly=false){
-const selected=$("topic").value;
-session=questions.map((q,i)=>({...q,id:i})).filter(q=>(selected==="All"||q.t===selected)&&(!reviewOnly||stats.wrong.includes(q.id)));
-if(!session.length){alert("No incorrect answers to review for this selection yet. Try a practice session first.");return;}
-index=0;answered={};
-$("results").classList.add("hidden");$("quiz").classList.remove("hidden");
-render();
+function updateStats(){
+ const answered = Object.keys(saved.answers).filter(k=>saved.answers[k]!==undefined).length;
+ const correct = Object.values(saved.answers).filter(v=>v===true).length;
+ $("attempted").textContent = answered;
+ $("correctCount").textContent = correct;
+ $("accuracy").textContent = answered ? Math.round(correct/answered*100)+"%" : "0%";
+ $("progressBar").style.width = Math.min(100,answered/100*100)+"%";
+}
+function makeList(){
+ const topic = $("topic").value;
+ return questions.map((q,i)=>i).filter(i=>
+ (topic==="All"||questions[i][0]===topic) &&
+ (mode!=="incorrect"||saved.incorrect.includes(i))
+ );
+}
+function begin(newMode="all"){
+ mode = newMode;
+ list = makeList();
+ if(mode==="mock") list.sort(()=>Math.random()-.5),list=list.slice(0,20);
+ current=0;finished=false;
+ $("results").classList.add("hidden");
+ $("quiz").classList.remove("hidden");
+ if(!list.length){
+  $("position").textContent="No questions";
+  $("question").textContent="No incorrect answers to review for this topic yet.";
+  $("options").innerHTML="";
+  $("feedback").classList.add("hidden");
+  $("previous").disabled=true;$("next").disabled=true;
+  return;
+ }
+ render();
 }
 function render(){
-const q=session[index];
-$("position").textContent=`Question ${index+1} of ${session.length} • ${q.t}`;
-$("bar").style.width=((index+1)/session.length*100)+"%";
-$("question").textContent=q.q;
-$("options").innerHTML="";
-q.o.forEach((option,i)=>{
-const b=document.createElement("button");
-b.className="option";b.textContent=String.fromCharCode(65+i)+". "+option;
-b.onclick=()=>choose(i);
-$("options").appendChild(b);
-});
-$("feedback").textContent="";
-$("feedback").className="";
-$("prev").disabled=index===0;
-$("next").disabled=true;
-if(answered[q.id]!==undefined) showAnswer(answered[q.id],false);
+ const idx=list[current],q=questions[idx];
+ $("position").textContent=`Question ${current+1} of ${list.length} · ${q[0]}`;
+ $("question").textContent=q[1];
+ $("options").innerHTML="";
+ $("feedback").className="hidden";
+ $("feedback").textContent="";
+ const chosen=saved.choice && saved.choice[idx];
+ q[2].forEach((opt,j)=>{
+  const b=document.createElement("button");
+  b.className="option";
+  b.textContent=String.fromCharCode(65+j)+". "+opt;
+  b.disabled=saved.answers[idx]!==undefined;
+  if(saved.answers[idx]!==undefined && j===q[3]) b.classList.add("correct");
+  if(saved.answers[idx]===false && chosen===j && j!==q[3]) b.classList.add("wrong");
+  b.onclick=()=>answer(idx,j);
+  $("options").appendChild(b);
+ });
+ if(saved.answers[idx]!==undefined){
+  showFeedback(idx,saved.answers[idx]);
+ }
+ $("previous").disabled=current===0;
+ $("next").textContent=current===list.length-1?"Finish":"Next Question";
+ $("next").disabled=false;
 }
-function choose(choice){
-const q=session[index];
-if(answered[q.id]!==undefined)return;
-answered[q.id]=choice;
-stats.attempts++;
-if(choice===q.a){stats.correct++;stats.wrong=stats.wrong.filter(id=>id!==q.id);}
-else if(!stats.wrong.includes(q.id)){stats.wrong.push(q.id);}
-saveStats();showAnswer(choice,true);
+function answer(idx,j){
+ if(saved.answers[idx]!==undefined)return;
+ const q=questions[idx];
+ const right=j===q[3];
+ if(!saved.choice)saved.choice={};
+ saved.choice[idx]=j;
+ saved.answers[idx]=right;
+ if(!right){
+  if(!saved.incorrect.includes(idx))saved.incorrect.push(idx);
+ } else {
+  saved.incorrect=saved.incorrect.filter(i=>i!==idx);
+ }
+ persist();render();
 }
-function showAnswer(choice,focus){
-const q=session[index], buttons=[...$("options").children];
-buttons.forEach((b,i)=>{b.disabled=true;if(i===q.a)b.classList.add("correct");else if(i===choice)b.classList.add("wrong");});
-const ok=choice===q.a;
-$("feedback").className=ok?"good":"bad";
-$("feedback").innerHTML=`<strong>${ok?"Correct!":"Not quite."}</strong><br>Correct answer: ${String.fromCharCode(65+q.a)}. ${q.o[q.a]}<br><br>${q.e}`;
-$("next").disabled=false;
-$("next").textContent=index===session.length-1?"Finish Practice":"Next Question";
+function showFeedback(idx,right){
+ const q=questions[idx],f=$("feedback");
+ f.className=right?"good":"bad";
+ f.textContent=(right?"Correct! ":"Not quite. Correct answer: "+String.fromCharCode(65+q[3])+". "+q[2][q[3]]+". ")+q[4];
 }
-$("start").onclick=()=>startPractice(false);
-$("review").onclick=()=>startPractice(true);
-$("prev").onclick=()=>{if(index>0){index--;render();}};
-$("next").onclick=()=>{
-if(index<session.length-1){index++;render();}
-else{
-$("quiz").classList.add("hidden");$("results").classList.remove("hidden");
-const correct=session.filter(q=>answered[q.id]===q.a).length;
-const done=session.filter(q=>answered[q.id]!==undefined).length;
-$("resultText").textContent=`You answered ${done} of ${session.length} questions. Correct answers in this session: ${correct}. Review explanations and practise again to improve.`;
+function next(){
+ if(current<list.length-1){current++;render();return;}
+ finished=true;
+ $("quiz").classList.add("hidden");
+ $("results").classList.remove("hidden");
+ const done=list.filter(i=>saved.answers[i]!==undefined);
+ const correct=done.filter(i=>saved.answers[i]===true).length;
+ $("resultText").textContent=`You completed this set. Correct answers among questions you have answered in this set: ${correct} of ${done.length}. Overall accuracy is shown in the dashboard.`;
 }
-};
-$("again").onclick=()=>startPractice(false);
+$("start").onclick=()=>begin("all");
+$("review").onclick=()=>begin("incorrect");
+$("mock").onclick=()=>begin("mock");
+$("again").onclick=()=>begin(mode);
+$("previous").onclick=()=>{if(current>0){current--;render();}};
+$("next").onclick=next;
+$("topic").onchange=()=>{if(mode!=="mock")begin(mode);};
 updateStats();
+begin("all");
 </script>
 </body>
 </html>
