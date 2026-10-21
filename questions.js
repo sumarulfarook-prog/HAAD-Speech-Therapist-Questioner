@@ -8101,3 +8101,6 @@ const QUESTION_BANK = [
     answer: 3,
     explanation: "Ethical evidence-based care combines research, professional expertise, client values, and ongoing evaluation of outcomes."
   },
+];
+
+window.questions = questions;
