@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123b5d">
+<title>Speech Therapist Exam Practice</title>
+<style>
+:root{--navy:#123b5d;--blue:#1769aa;--bg:#f3f6fa;--green:#18794e;--red:#b42318}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:#202b38;line-height:1.5}
+header{background:var(--navy);color:white;padding:24px 16px;text-align:center}
+header h1{margin:0;font-size:24px}
+header p{margin:7px 0 0;color:#e1edf7}
+main{max-width:850px;margin:20px auto;padding:0 14px}
+.panel{background:white;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 3px 14px #132f4c0d}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:#edf4fa;border-radius:10px;padding:12px;text-align:center}
+.stat strong{display:block;font-size:23px;color:var(--navy)}
+label{font-weight:bold;display:block;margin-bottom:7px}
+select,button{font:inherit}
+select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;background:white}
+button{cursor:pointer;border:0;border-radius:9px;padding:12px 16px;font-weight:bold}
+.primary{background:var(--blue);color:white}
+.secondary{background:#e7eef5;color:var(--navy)}
+button:disabled{opacity:.65;cursor:default}
+#question{font-size:19px;font-weight:bold;margin:12px 0 18px}
+.option{display:block;width:100%;text-align:left;margin:9px 0;background:#f5f7fa;border:1px solid #dbe3eb;padding:13px;border-radius:9px;color:#202b38}
+.option:hover:not(:disabled){border-color:var(--blue);background:#edf6ff}
+.option.correct{background:#e7f7ed;border-color:var(--green)}
+.option.wrong{background:#fff0ef;border-color:var(--red)}
+#feedback{padding:13px;border-radius:9px;margin-top:14px}
+#feedback:empty{display:none}
+.good{background:#e7f7ed;color:#145b39}
+.bad{background:#fff0ef;color:#8e2018}
+.muted{color:#657487;font-size:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.row button{flex:1}
+.progress{height:8px;background:#e3eaf1;border-radius:10px;overflow:hidden;margin:10px 0}
+#bar{height:100%;width:0;background:#2381c4;transition:width .2s}
+.hidden{display:none}
+footer{text-align:center;color:#64748b;font-size:13px;padding:15px}
+</style>
+</head>
+<body>
+<header>
+<h1>Speech Therapist Exam Practice</h1>
+<p>HAAD / DOH-style preparation • Learn one question at a time</p>
+</header>
+<main>
+<section class="panel">
+<h2 style="margin-top:0">Your study dashboard</h2>
+<div class="stats">
+<div class="stat"><strong id="attempts">0</strong><span class="muted">Answered</span></div>
+<div class="stat"><strong id="correctCount">0</strong><span class="muted">Correct</span></div>
+<div class="stat"><strong id="accuracy">0%</strong><span class="muted">Accuracy</span></div>
+</div>
+<p class="muted">Your progress is saved in this browser on this device.</p>
+<label for="topic">Choose a topic</label>
+<select id="topic">
+<option value="All">All topics</option>
+<option>Anatomy & Physiology</option>
+<option>Language Development</option>
+<option>Speech Sound Disorders</option>
+<option>Aphasia & Motor Speech</option>
+<option>Fluency, Voice & Resonance</option>
+<option>Autism & AAC</option>
+<option>Dysphagia & Feeding</option>
+<option>Hearing & Early Intervention</option>
+<option>Evidence-Based Practice</option>
+<option>Ethics & Clinical Practice</option>
+</select>
+<div class="row">
+<button class="primary" id="start">Start / Restart Practice</button>
+<button class="secondary" id="review">Review Incorrect Answers</button>
+</div>
+</section>
+
+<section class="panel" id="quiz">
+<div class="muted" id="position">Choose a topic and start practising.</div>
+<div class="progress"><div id="bar"></div></div>
+<div id="question">Your first question will appear here.</div>
+<div id="options"></div>
+<div id="feedback" aria-live="polite"></div>
+<div class="row">
+<button class="secondary" id="prev" disabled>Previous</button>
+<button class="primary" id="next" disabled>Next Question</button>
+</div>
+</section>
+
+<section class="panel hidden" id="results">
+<h2>Practice complete!</h2>
+<p id="resultText"></p>
+<button class="primary" id="again">Practise Again</button>
+</section>
+<footer>
+For educational practice only. This website is not affiliated with HAAD, DOH, or any licensing authority.
+</footer>
+</main>
+
+<script>
+const questions = [
+{t:"Anatomy & Physiology",q:"Which cranial nerve primarily controls most movements of the tongue?",o:["Trigeminal nerve (V)","Facial nerve (VII)","Hypoglossal nerve (XII)","Vagus nerve (X)"],a:2,e:"The hypoglossal nerve (CN XII) supplies most intrinsic and extrinsic tongue muscles."},
+{t:"Anatomy & Physiology",q:"Which structure separates the oral cavity from the nasal cavity during normal swallowing?",o:["Epiglottis alone","Soft palate elevating against the pharyngeal wall","Vocal folds opening","Tongue tip contacting the teeth"],a:1,e:"Elevation of the soft palate helps close the velopharyngeal port during swallowing."},
+{t:"Anatomy & Physiology",q:"Which cranial nerve provides the main motor innervation to the muscles of facial expression?",o:["CN V","CN VII","CN IX","CN XII"],a:1,e:"The facial nerve (CN VII) innervates the muscles of facial expression."},
+{t:"Anatomy & Physiology",q:"The vocal folds are located in the:",o:["Pharynx","Larynx","Nasopharynx","Oral cavity"],a:1,e:"The vocal folds are housed within the larynx and vibrate during voiced sound production."},
+{t:"Anatomy & Physiology",q:"Which term describes the study of speech sound production and acoustic properties?",o:["Pragmatics","Phonetics","Morphology","Syntax"],a:1,e:"Phonetics studies how speech sounds are produced, transmitted, and perceived."},
+{t:"Anatomy & Physiology",q:"Which cranial nerve carries much of the motor supply for the pharynx and larynx?",o:["CN II","CN V","CN X","CN XII"],a:2,e:"The vagus nerve (CN X), including its branches, is important for pharyngeal and laryngeal motor function."},
+{t:"Language Development",q:"Which is an example of expressive language?",o:["Following a spoken instruction","Pointing after hearing a word","Naming a pictured object","Looking toward a sound"],a:2,e:"Expressive language is how a person communicates ideas using words, signs, or other language forms."},
+{t:"Language Development",q:"Understanding the meaning of words is primarily part of:",o:["Semantics","Phonology","Articulation","Voice"],a:0,e:"Semantics concerns word and sentence meaning."},
+{t:"Language Development",q:"Which assessment approach is especially useful for understanding a child's language in everyday contexts?",o:["Speech audiometry alone","Language sample analysis","Oral motor examination alone","Pure-tone screening alone"],a:1,e:"A language sample reveals how a child uses language spontaneously in connected communication."},
+{t:"Language Development",q:"The rules governing how words combine into sentences are called:",o:["Phonetics","Syntax","Prosody","Voice quality"],a:1,e:"Syntax describes sentence structure and word-order rules."},
+{t:"Language Development",q:"A child consistently has difficulty understanding spoken instructions. What should the clinician do first?",o:["Assume a language disorder without testing","Gather history and assess receptive language and hearing as appropriate","Begin voice therapy","Recommend surgery"],a:1,e:"A comprehensive assessment considers history, hearing, receptive language, and other relevant factors."},
+{t:"Speech Sound Disorders",q:"Replacing /k/ with /t/ in a word is an example of:",o:["Fronting","Backing","Gliding","Voicing"],a:0,e:"Fronting occurs when a sound made farther back in the mouth is replaced by one made farther forward."},
+{t:"Speech Sound Disorders",q:"Which term describes difficulty planning and programming speech movements despite adequate muscle strength?",o:["Dysarthria","Childhood apraxia of speech","Aphasia","Dysphagia"],a:1,e:"Childhood apraxia of speech is a motor-planning/programming disorder, not primarily a weakness disorder."},
+{t:"Speech Sound Disorders",q:"A phonological process is best described as:",o:["A pattern affecting classes of speech sounds","A hearing test result","A swallowing reflex","A voice pitch measure"],a:0,e:"Phonological processes are systematic patterns used in speech sound production."},
+{t:"Speech Sound Disorders",q:"Which task most directly samples a child's production of individual consonants in words?",o:["Pure-tone audiometry","Articulation assessment","Cognitive screening alone","Voice range profile"],a:1,e:"An articulation assessment samples speech sound production across relevant contexts."},
+{t:"Aphasia & Motor Speech",q:"A person has effortful, nonfluent speech but relatively better comprehension. Which aphasia pattern may fit?",o:["Broca-type aphasia","Wernicke-type aphasia","Pure word deafness in every case","No language impairment is possible"],a:0,e:"Broca-type aphasia often involves nonfluent, effortful output; a full assessment is needed to characterize the profile."},
+{t:"Aphasia & Motor Speech",q:"Dysarthria primarily results from impairment in:",o:["Motor execution for speech","Word meaning alone","Reading comprehension alone","Hearing sensitivity alone"],a:0,e:"Dysarthria arises from neuromuscular impairments affecting speech execution."},
+{t:"Aphasia & Motor Speech",q:"Which activity is an example of functional communication treatment for an adult with aphasia?",o:["Practising a real-life conversation about arranging an appointment","Only memorizing unrelated lists indefinitely","Avoiding all communication tasks","Testing hearing only"],a:0,e:"Functional treatment targets meaningful communication in daily situations."},
+{t:"Aphasia & Motor Speech",q:"Which feature is commonly associated with apraxia of speech?",o:["Consistent muscle weakness as the defining feature","Difficulty planning speech movements and sound sequencing","Loss of hearing in every case","Excessive saliva as the sole sign"],a:1,e:"Apraxia of speech involves impaired planning/programming of speech movements."},
+{t:"Fluency, Voice & Resonance",q:"Stuttering may include:",o:["Sound repetitions, prolongations, or blocks","Only reduced hearing thresholds","Only difficulty chewing","Only reduced vocabulary"],a:0,e:"Common stuttering features include repetitions, prolongations, and blocks."},
+{t:"Fluency, Voice & Resonance",q:"Persistent hoarseness should prompt consideration of:",o:["Laryngeal evaluation by an appropriate medical professional","Ignoring symptoms indefinitely","Tongue strengthening without assessment","Hearing aid fitting automatically"],a:0,e:"Persistent voice changes may require medical evaluation of the larynx before or alongside voice therapy."},
+{t:"Fluency, Voice & Resonance",q:"Hypernasal speech is commonly associated with:",o:["Excessive nasal resonance on oral sounds","Reduced hearing sensitivity only","Slow chewing only","A vocabulary deficit in every case"],a:0,e:"Hypernasality reflects excessive nasal resonance, often related to velopharyngeal dysfunction."},
+{t:"Fluency, Voice & Resonance",q:"Which measure is most directly related to perceived vocal pitch?",o:["Fundamental frequency","Vital capacity alone","Word-finding latency","Tongue pressure alone"],a:0,e:"Fundamental frequency is an acoustic correlate of perceived pitch."},
+{t:"Autism & AAC",q:"AAC stands for:",o:["Augmentative and Alternative Communication","Auditory Assessment Calibration","Applied Articulation Counting","Automatic Airway Closure"],a:0,e:"AAC includes communication methods that supplement or replace spoken communication."},
+{t:"Autism & AAC",q:"When introducing AAC, the clinician should generally:",o:["Wait until all speech therapy has failed","Consider communication needs and provide access with appropriate partner support","Restrict the system to testing sessions","Remove other communication methods"],a:1,e:"AAC can support communication alongside speech and should be individualized and accessible."},
+{t:"Autism & AAC",q:"Which approach supports social communication intervention for an autistic child?",o:["Individualize goals around meaningful participation and the child's needs","Require eye contact as the sole measure of success","Ignore family priorities","Use the same goals for every child"],a:0,e:"Intervention should be individualized, respectful, functional, and guided by the person's needs and priorities."},
+{t:"Dysphagia & Feeding",q:"Dysphagia means difficulty with:",o:["Swallowing","Hearing","Spelling","Voice pitch only"],a:0,e:"Dysphagia is a swallowing disorder that may affect safety or efficiency."},
+{t:"Dysphagia & Feeding",q:"Which finding can be a possible sign of swallowing difficulty?",o:["Coughing during meals","Improved handwriting","A higher reading score","Clear speech in every situation"],a:0,e:"Coughing during meals can indicate swallowing difficulty, although aspiration may also occur without coughing."},
+{t:"Dysphagia & Feeding",q:"Which instrumental examination can visualize swallowing physiology using X-ray and contrast material?",o:["Videofluoroscopic swallow study (VFSS)","Pure-tone audiometry","Electrocardiogram","Standard spirometry alone"],a:0,e:"VFSS records swallowing with X-ray as the person swallows contrast-containing materials."},
+{t:"Dysphagia & Feeding",q:"A patient develops sudden choking and breathing difficulty during a meal. What is the priority?",o:["Continue the meal slowly","Follow emergency response procedures and address airway/breathing immediately","Complete a language test first","Offer more food"],a:1,e:"Airway and breathing emergencies require immediate action under local emergency protocols."},
+{t:"Hearing & Early Intervention",q:"What is the main purpose of a hearing screening?",o:["Identify people who may need further hearing assessment","Diagnose every communication disorder","Measure vocabulary only","Assess swallowing safety"],a:0,e:"Screening identifies possible hearing concerns; a diagnostic assessment is needed when indicated."},
+{t:"Hearing & Early Intervention",q:"When a child has suspected hearing loss and language delay, the best next step is generally to:",o:["Arrange appropriate hearing evaluation and coordinate developmental assessment","Wait several years without follow-up","Assume the child is not interested in communication","Begin treatment without gathering information"],a:0,e:"Early identification and coordinated assessment support timely intervention."},
+{t:"Evidence-Based Practice",q:"Evidence-based practice integrates:",o:["Research evidence, clinical expertise, and client values and context","Research papers alone","Personal opinion alone","One fixed treatment for all clients"],a:0,e:"Evidence-based practice combines the best available evidence, clinician expertise, and client preferences and circumstances."},
+{t:"Evidence-Based Practice",q:"Why should treatment goals be measurable?",o:["To monitor progress and judge whether intervention is helping","To avoid communicating with families","To eliminate reassessment","To guarantee identical outcomes"],a:0,e:"Measurable goals support objective progress monitoring and treatment decisions."},
+{t:"Evidence-Based Practice",q:"A clinician finds that a treatment is not producing expected progress. What is an appropriate response?",o:["Continue unchanged forever","Review data, reassess relevant factors, and modify the plan as appropriate","Stop documenting outcomes","Blame the client"],a:1,e:"Clinical decisions should respond to outcome data, reassessment, and the client's needs."},
+{t:"Ethics & Clinical Practice",q:"Before beginning an assessment or intervention, the clinician should normally:",o:["Obtain informed consent as required and explain the process","Promise a guaranteed cure","Share records publicly","Skip explaining the purpose"],a:0,e:"Informed consent includes appropriate information about the service, risks, benefits, and choices."},
+{t:"Ethics & Clinical Practice",q:"How should confidential clinical information be handled?",o:["Share it freely with friends","Protect it and disclose only as authorized or legally permitted/required","Post it online without identifiers being checked","Send it to anyone who asks"],a:1,e:"Clinicians must protect confidentiality and follow applicable law, professional standards, and consent requirements."},
+{t:"Ethics & Clinical Practice",q:"A clinician is asked to treat a condition outside their competence. What should they do?",o:["Proceed without support","Seek appropriate supervision, training, referral, or consultation","Invent credentials","Avoid telling the client anything"],a:1,e:"Clinicians should practise within their competence and arrange appropriate support or referral."}
+];
+
+const $ = id => document.getElementById(id);
+let session = [], index = 0, answered = {};
+let stats = JSON.parse(localStorage.getItem("speechPracticeStats") || '{"attempts":0,"correct":0,"wrong":[]}');
+function saveStats(){localStorage.setItem("speechPracticeStats",JSON.stringify(stats));updateStats();}
+function updateStats(){
+$("attempts").textContent=stats.attempts;
+$("correctCount").textContent=stats.correct;
+$("accuracy").textContent=stats.attempts?Math.round(stats.correct/stats.attempts*100)+"%":"0%";
+}
+function startPractice(reviewOnly=false){
+const selected=$("topic").value;
+session=questions.map((q,i)=>({...q,id:i})).filter(q=>(selected==="All"||q.t===selected)&&(!reviewOnly||stats.wrong.includes(q.id)));
+if(!session.length){alert("No incorrect answers to review for this selection yet. Try a practice session first.");return;}
+index=0;answered={};
+$("results").classList.add("hidden");$("quiz").classList.remove("hidden");
+render();
+}
+function render(){
+const q=session[index];
+$("position").textContent=`Question ${index+1} of ${session.length} • ${q.t}`;
+$("bar").style.width=((index+1)/session.length*100)+"%";
+$("question").textContent=q.q;
+$("options").innerHTML="";
+q.o.forEach((option,i)=>{
+const b=document.createElement("button");
+b.className="option";b.textContent=String.fromCharCode(65+i)+". "+option;
+b.onclick=()=>choose(i);
+$("options").appendChild(b);
+});
+$("feedback").textContent="";
+$("feedback").className="";
+$("prev").disabled=index===0;
+$("next").disabled=true;
+if(answered[q.id]!==undefined) showAnswer(answered[q.id],false);
+}
+function choose(choice){
+const q=session[index];
+if(answered[q.id]!==undefined)return;
+answered[q.id]=choice;
+stats.attempts++;
+if(choice===q.a){stats.correct++;stats.wrong=stats.wrong.filter(id=>id!==q.id);}
+else if(!stats.wrong.includes(q.id)){stats.wrong.push(q.id);}
+saveStats();showAnswer(choice,true);
+}
+function showAnswer(choice,focus){
+const q=session[index], buttons=[...$("options").children];
+buttons.forEach((b,i)=>{b.disabled=true;if(i===q.a)b.classList.add("correct");else if(i===choice)b.classList.add("wrong");});
+const ok=choice===q.a;
+$("feedback").className=ok?"good":"bad";
+$("feedback").innerHTML=`<strong>${ok?"Correct!":"Not quite."}</strong><br>Correct answer: ${String.fromCharCode(65+q.a)}. ${q.o[q.a]}<br><br>${q.e}`;
+$("next").disabled=false;
+$("next").textContent=index===session.length-1?"Finish Practice":"Next Question";
+}
+$("start").onclick=()=>startPractice(false);
+$("review").onclick=()=>startPractice(true);
+$("prev").onclick=()=>{if(index>0){index--;render();}};
+$("next").onclick=()=>{
+if(index<session.length-1){index++;render();}
+else{
+$("quiz").classList.add("hidden");$("results").classList.remove("hidden");
+const correct=session.filter(q=>answered[q.id]===q.a).length;
+const done=session.filter(q=>answered[q.id]!==undefined).length;
+$("resultText").textContent=`You answered ${done} of ${session.length} questions. Correct answers in this session: ${correct}. Review explanations and practise again to improve.`;
+}
+};
+$("again").onclick=()=>startPractice(false);
+updateStats();
+</script>
+</body>
+</html>
