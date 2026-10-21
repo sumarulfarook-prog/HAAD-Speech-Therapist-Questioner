@@ -4,214 +4,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#6d5bd0">
 <title>Speech Therapist Exam Practice</title>
 <style>
-:root{font-family:Arial,sans-serif;color:#25223b;background:#f6f4ff}
 *{box-sizing:border-box}
-body{margin:0}
-header{background:#6d5bd0;color:white;padding:22px 16px;text-align:center}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6fb;color:#243047}
+header{background:#5546a5;color:white;padding:22px 16px;text-align:center}
+header h1{margin:0 0 8px;font-size:25px}
 main{max-width:760px;margin:20px auto;padding:0 14px}
-.panel{background:white;padding:20px;border-radius:18px;margin-bottom:16px;box-shadow:0 3px 15px #30206b12}
-h1{font-size:25px;margin:0 0 8px}
-h2{font-size:19px}
-select,button{font:inherit;padding:12px;border-radius:10px;border:1px solid #d8d2ef}
-select{width:100%;margin:5px 0 12px;background:white}
-button{cursor:pointer}
-.primary{background:#6d5bd0;color:white;border:0;font-weight:bold}
-.option{display:block;width:100%;text-align:left;background:white;margin:9px 0;border:2px solid #e7e2f7}
-.option:hover:not(:disabled){border-color:#6d5bd0}
-.option:disabled{cursor:default;opacity:1}
-.option.correct{background:#e3f8eb;border-color:#32a36a}
-.option.wrong{background:#fff0ed;border-color:#e77b69}
-.row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.muted{color:#716d83;font-size:14px}
-#feedback{line-height:1.6;margin-top:12px}
-.cats{display:flex;justify-content:space-around;gap:12px;text-align:center}
-.cat{font-size:48px;display:inline-block}
-.cat.animate{animation:bounce .65s ease}
-.cat.bonk{animation:bonk .6s ease}
-@keyframes bounce{50%{transform:translateY(-15px) rotate(-8deg)}}
-@keyframes bonk{30%{transform:rotate(-20deg) translateX(-5px)}60%{transform:rotate(18deg)}}
-#progressbar{height:9px;background:#eae6f8;border-radius:9px;overflow:hidden;margin:10px 0}
-#progressfill{height:100%;width:0;background:#6d5bd0;transition:width .2s}
+.panel{background:white;padding:20px;border-radius:16px;margin-bottom:16px;box-shadow:0 3px 14px #17255412}
+select,button{font:inherit;padding:12px;border-radius:9px;border:1px solid #d4d8e5}
+select{width:100%;margin:7px 0 14px;background:white}
+button{cursor:pointer;background:#5546a5;color:white;border:0;font-weight:bold}
+button:disabled{opacity:.5;cursor:default}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.actions button{flex:1}
+.option{display:block;width:100%;text-align:left;margin:9px 0;background:#f5f5fc;color:#243047;border:2px solid #e1e2ef}
+.option:hover:not(:disabled){border-color:#8879df}
+.option.correct{background:#e0f8e9;border-color:#36a567}
+.option.wrong{background:#ffe7e7;border-color:#e76a6a}
+#feedback{padding:13px;border-radius:10px;margin-top:12px;line-height:1.5}
+#feedback:empty{display:none}
+.meter{height:9px;background:#e6e6f2;border-radius:20px;overflow:hidden;margin:12px 0}
+#bar{height:100%;width:0;background:#6755c8;transition:width .2s}
+.cats{display:flex;justify-content:center;gap:24px;font-size:42px;margin:10px}
+.cat{display:inline-block}
+.treat{animation:happy .6s ease}
+.bonk{animation:bonk .6s ease}
+@keyframes happy{50%{transform:translateY(-14px) rotate(10deg)}}
+@keyframes bonk{25%{transform:rotate(-20deg) translateX(-5px)}50%{transform:rotate(20deg) translateX(5px)}}
+.small{font-size:14px;color:#626b80}
 .hidden{display:none}
-footer{text-align:center;padding:20px;color:#716d83;font-size:13px}
 </style>
 </head>
 <body>
 <header>
-  <h1>🐱 Speech Therapist Exam Practice</h1>
-  <div>Learn a little every day. Help the cats earn their treats!</div>
+<h1>🐱 Speech Therapist Exam Practice</h1>
+<p>Learn • Practise • Improve</p>
 </header>
 <main>
-  <section class="panel">
-    <div class="row">
-      <div><strong>Choose your practice</strong></div>
-      <div class="muted">Answered: <span id="answered">0</span></div>
-    </div>
-    <label for="difficulty">Difficulty</label>
-    <select id="difficulty">
-      <option>Easy</option><option>Moderate</option><option>Hard</option>
-    </select>
-    <label for="topic">Topic</label>
-    <select id="topic"><option value="all">All topics</option></select>
-    <label for="length">Questions per session</label>
-    <select id="length">
-      <option value="10">10 questions</option>
-      <option value="25">25 questions</option>
-      <option value="50">50 questions</option>
-    </select>
-    <button class="primary" id="start">Start / Restart session</button>
-    <div class="muted" style="margin-top:12px">Overall correct answers: <strong id="score">0</strong></div>
-  </section>
+<section class="panel" id="setup">
+<h2>Set up your practice</h2>
+<label for="difficulty">Difficulty</label>
+<select id="difficulty">
+<option value="Easy">Easy</option>
+<option value="Moderate">Moderate</option>
+<option value="Hard">Hard</option>
+<option value="All">All difficulties</option>
+</select>
+<label for="topic">Topic</label>
+<select id="topic"><option value="All">All topics</option></select>
+<label for="count">Questions in this session</label>
+<select id="count">
+<option>10</option><option>20</option><option>30</option>
+<option>50</option><option>100</option>
+</select>
+<div class="actions">
+<button id="start">Start practice</button>
+<button id="review">Review mistakes</button>
+</div>
+<p class="small">Progress and mistakes are saved in this browser.</p>
+</section>
 
-  <section class="panel">
-    <div class="cats">
-      <div><div id="owner" class="cat">😺</div><strong>Cat owner</strong><div id="treats" class="muted">Treats: 0</div></div>
-      <div><div id="student" class="cat">🐱</div><strong>Study cat</strong><div id="catmessage" class="muted">Let's learn!</div></div>
-    </div>
-  </section>
+<section class="panel">
+<h3>Your learning progress</h3>
+<p id="stats">Loading progress…</p>
+</section>
 
-  <section class="panel" id="quiz">
-    <div class="row">
-      <span id="counter" class="muted">Loading questions…</span>
-      <span id="percent" class="muted">0%</span>
-    </div>
-    <div id="progressbar"><div id="progressfill"></div></div>
-    <h2 id="question">Please wait…</h2>
-    <div id="options"></div>
-    <div id="feedback" aria-live="polite"></div>
-    <div class="row" style="margin-top:16px">
-      <button id="hint">Show hint</button>
-      <button class="primary" id="next" disabled>Next question →</button>
-    </div>
-    <div id="hinttext" class="muted"></div>
-  </section>
+<section class="panel hidden" id="quiz">
+<div class="small" id="position"></div>
+<div class="meter"><div id="bar"></div></div>
+<p class="small" id="meta"></p>
+<h2 id="question"></h2>
+<div id="options"></div>
+<div id="feedback" aria-live="polite"></div>
+<div class="cats">
+<span id="owner" class="cat" title="The cat owner">🐱</span>
+<span id="student" class="cat" title="The student cat">😺</span>
+</div>
+<p id="catMessage" class="small" style="text-align:center">Choose your best answer!</p>
+<button id="next" class="hidden">Next question →</button>
+</section>
 
-  <section class="panel hidden" id="summary">
-    <h2>Session complete! 🎉</h2>
-    <p id="summarytext"></p>
-    <button class="primary" id="again">Practise again</button>
-  </section>
+<section class="panel hidden" id="results">
+<h2>Session complete! 🎉</h2>
+<p id="summary"></p>
+<div class="actions">
+<button id="again">Practise again</button>
+<button id="home">Back to setup</button>
+</div>
+</section>
 </main>
-<footer>For educational exam preparation. Verify clinical guidance against current professional standards.</footer>
+
 <script src="questions.js"></script>
 <script>
 (() => {
-  const $ = id => document.getElementById(id);
-  let session=[], index=0, correct=0, locked=false, lastCorrectPosition=-1;
-  let wrongReview=[];
-  let totalCorrect=Number(localStorage.getItem('st_total_correct')||0);
-  let totalAnswered=Number(localStorage.getItem('st_total_answered')||0);
-  let totalTreats=Number(localStorage.getItem('st_cat_treats')||0);
-  $('score').textContent=totalCorrect;
-  $('answered').textContent=totalAnswered;
-  $('treats').textContent='Treats: '+totalTreats;
-
-  if(!Array.isArray(window.QUESTION_BANK)||!window.QUESTION_BANK.length){
-    $('question').textContent='Question bank could not load. Check that questions.js exists in the repository root.';
-    $('start').disabled=true; return;
-  }
-
-  [...new Set(QUESTION_BANK.map(q=>q.topic))].sort().forEach(topic=>{
-    const op=document.createElement('option');op.value=topic;op.textContent=topic;$('topic').appendChild(op);
+const $ = id => document.getElementById(id);
+const BANK = window.QUESTION_BANK || [];
+let session = [], index = 0, score = 0, mistakes = [], answered = false;
+const read = () => {
+ try { return JSON.parse(localStorage.getItem('speechPracticeProgress') || '{"answered":0,"correct":0,"mistakes":[]}'); }
+ catch { return {answered:0,correct:0,mistakes:[]}; }
+};
+const save = data => localStorage.setItem('speechPracticeProgress', JSON.stringify(data));
+function updateStats() {
+ const p = read();
+ $('stats').textContent = `Answered: ${p.answered} · Correct: ${p.correct} · Accuracy: ${p.answered ? Math.round(p.correct/p.answered*100) : 0}%`;
+}
+function shuffle(arr) {
+ for(let i=arr.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [arr[i],arr[j]]=[arr[j],arr[i]];
+ }
+ return arr;
+}
+function initTopics() {
+ [...new Set(BANK.map(q=>q.topic))].sort().forEach(topic=>{
+  const opt=document.createElement('option'); opt.value=topic; opt.textContent=topic;
+  $('topic').appendChild(opt);
+ });
+}
+function start(reviewOnly=false) {
+ const p=read();
+ let pool=BANK.filter(q=>
+  ($('difficulty').value==='All'||q.difficulty===$('difficulty').value) &&
+  ($('topic').value==='All'||q.topic===$('topic').value)
+ );
+ if(reviewOnly) pool=pool.filter(q=>p.mistakes.includes(q.id));
+ if(!pool.length){alert(reviewOnly?'No saved mistakes to review yet.':'No questions match those settings.');return;}
+ session=shuffle([...pool]).slice(0,reviewOnly?pool.length:Number($('count').value));
+ index=0;score=0;mistakes=[]; $('setup').classList.add('hidden');
+ $('results').classList.add('hidden');$('quiz').classList.remove('hidden');
+ showQuestion();
+}
+function showQuestion() {
+ answered=false;
+ const q=session[index];
+ $('position').textContent=`Question ${index+1} of ${session.length}`;
+ $('bar').style.width=`${index/session.length*100}%`;
+ $('meta').textContent=`${q.topic} · ${q.difficulty}`;
+ $('question').textContent=q.question;
+ $('options').replaceChildren();
+ $('feedback').textContent='';
+ $('next').classList.add('hidden');
+ $('owner').className='cat';$('student').className='cat';
+ $('catMessage').textContent='Choose your best answer!';
+ const options=shuffle(q.options.map((text,i)=>({text,correct:i===q.answer})));
+ options.forEach((item,i)=>{
+  const b=document.createElement('button');
+  b.className='option';b.textContent=`${String.fromCharCode(65+i)}. ${item.text}`;
+  b.onclick=()=>answer(b,item.correct,q);
+  $('options').appendChild(b);
+ });
+}
+function answer(button,correct,q) {
+ if(answered)return; answered=true;
+ document.querySelectorAll('.option').forEach(b=>b.disabled=true);
+ const p=read();p.answered++;
+ if(correct){score++;p.correct++;button.classList.add('correct');
+  $('owner').classList.add('treat');$('student').classList.add('treat');
+  $('catMessage').textContent='😻 Correct! The owner gives the student cat a treat!';
+  $('feedback').style.background='#e0f8e9';
+  $('feedback').textContent='Correct! '+q.explanation;
+  p.mistakes=p.mistakes.filter(id=>id!==q.id);
+ } else {
+  button.classList.add('wrong');mistakes.push(q.id);
+  p.mistakes=[...new Set([...p.mistakes,q.id])];
+  $('owner').classList.add('bonk');$('student').classList.add('bonk');
+  $('catMessage').textContent='🙀 Bonk! Just cartoon comedy. Learn and try again!';
+  $('feedback').style.background='#fff0f0';
+  $('feedback').textContent='Not quite. Best answer: '+q.options[q.answer]+'. '+q.explanation;
+  // Highlight the correct option.
+  document.querySelectorAll('.option').forEach(b=>{
+   if(b.textContent.slice(3)===q.options[q.answer]) b.classList.add('correct');
   });
-
-  function shuffleOptions(q){
-    const opts=q.options.map((label,i)=>({label,correct:i===q.answer}));
-    for(let i=opts.length-1;i>0;i--){
-      const j=Math.floor(Math.random()*(i+1));[opts[i],opts[j]]=[opts[j],opts[i]];
-    }
-    let correctAt=opts.findIndex(o=>o.correct);
-    if(correctAt===lastCorrectPosition){
-      const other=(correctAt+1+Math.floor(Math.random()*3))%4;
-      [opts[correctAt],opts[other]]=[opts[other],opts[correctAt]];
-      correctAt=other;
-    }
-    lastCorrectPosition=correctAt;
-    return {opts,correctAt};
-  }
-
-  function start(){
-    const diff=$('difficulty').value, topic=$('topic').value;
-    const pool=QUESTION_BANK.filter(q=>q.difficulty===diff&&(topic==='all'||q.topic===topic));
-    if(!pool.length){$('question').textContent='No questions available for this selection yet.';return;}
-    session=pool.sort(()=>Math.random()-.5).slice(0,Number($('length').value));
-    index=0;correct=0;wrongReview=[];lastCorrectPosition=-1;
-    $('summary').classList.add('hidden');$('quiz').classList.remove('hidden');
-    render();
-  }
-
-  function render(){
-    locked=false;
-    const q=session[index], data=shuffleOptions(q);
-    q._display=data.opts;q._answer=data.correctAt;
-    $('counter').textContent=`Question ${index+1} of ${session.length} · ${q.topic}`;
-    $('percent').textContent=Math.round(index/session.length*100)+'%';
-    $('progressfill').style.width=(index/session.length*100)+'%';
-    $('question').textContent=q.question;
-    $('options').replaceChildren();
-    $('feedback').textContent='';$('hinttext').textContent='';$('next').disabled=true;
-    $('hint').disabled=false;
-    data.opts.forEach((o,i)=>{
-      const b=document.createElement('button');b.className='option';
-      b.textContent=String.fromCharCode(65+i)+'. '+o.label;
-      b.onclick=()=>answer(i,b);$('options').appendChild(b);
-    });
-  }
-
-  function answer(choice,button){
-    if(locked)return;locked=true;
-    const q=session[index],buttons=[...$('options').children];
-    buttons.forEach((b,i)=>{
-      b.disabled=true;
-      if(i===q._answer)b.classList.add('correct');
-    });
-    totalAnswered++;
-    if(choice===q._answer){
-      correct++;totalCorrect++;totalTreats++;
-      button.classList.add('correct');
-      $('owner').textContent='😻';$('student').textContent='😸';
-      $('owner').className='cat animate';$('student').className='cat animate';
-      $('catmessage').textContent='Correct! Yum, a treat!';
-      $('feedback').textContent='Correct! '+q.explanation;
-    }else{
-      button.classList.add('wrong');wrongReview.push(q);
-      $('owner').textContent='😼';$('student').textContent='🙀';
-      $('owner').className='cat bonk';$('student').className='cat bonk';
-      $('catmessage').textContent='Oops! Try again next time.';
-      $('feedback').textContent='Not quite. Best answer: '+q._display[q._answer].label+'. '+q.explanation;
-    }
-    localStorage.setItem('st_total_correct',totalCorrect);
-    localStorage.setItem('st_total_answered',totalAnswered);
-    localStorage.setItem('st_cat_treats',totalTreats);
-    $('score').textContent=totalCorrect;$('answered').textContent=totalAnswered;
-    $('treats').textContent='Treats: '+totalTreats;
-    $('next').disabled=false;$('next').textContent=index===session.length-1?'Finish session':'Next question →';
-  }
-
-  $('start').onclick=start;
-  $('next').onclick=()=>{
-    if(!locked)return;
-    if(index<session.length-1){index++;render();}
-    else{
-      $('quiz').classList.add('hidden');$('summary').classList.remove('hidden');
-      $('summarytext').textContent=`You answered ${correct} out of ${session.length} correctly (${Math.round(correct/session.length*100)}%). Incorrect answers: ${wrongReview.length}.`;
-      $('progressfill').style.width='100%';$('percent').textContent='100%';
-      if(wrongReview.length){
-        const b=document.createElement('button');b.textContent='Review incorrect questions';b.style.marginTop='10px';
-        b.onclick=()=>{session=wrongReview.slice();index=0;correct=0;lastCorrectPosition=-1;$('summary').classList.add('hidden');$('quiz').classList.remove('hidden');render();};
-        $('summary').appendChild(b);
-      }
-    }
-  };
-  $('hint').onclick=()=>{
-    $('hinttext').textContent=session[index].hint||'Review the key concept and compare each option carefully.';
-    $('hint').disabled=true;
-  };
-  $('again').onclick=start;
-  start();
+ }
+ save(p);updateStats();
+ $('bar').style.width=`${(index+1)/session.length*100}%`;
+ $('next').textContent=index===session.length-1?'See results':'Next question →';
+ $('next').classList.remove('hidden');
+}
+function finish() {
+ $('quiz').classList.add('hidden');$('results').classList.remove('hidden');
+ $('summary').textContent=`You scored ${score} out of ${session.length} (${Math.round(score/session.length*100)}%). Review mistakes to strengthen your knowledge.`;
+}
+$('start').onclick=()=>start(false);
+$('review').onclick=()=>start(true);
+$('next').onclick=()=>{if(index<session.length-1){index++;showQuestion();}else finish();};
+$('again').onclick=()=>start(false);
+$('home').onclick=()=>{$('results').classList.add('hidden');$('setup').classList.remove('hidden');};
+initTopics();updateStats();
 })();
 </script>
 </body>
