@@ -16,239 +16,298 @@
  * Add new questions to QUESTION_BANK using the same structure.
  */
 
+
 const QUESTION_BANK = [
   {
-    id:"ST001",difficulty:"Easy",topic:"Anatomy and Physiology",
-    question:"Which structure contains the vocal folds?",
-    options:["Larynx","Pharynx","Hard palate","Nasopharynx"],
-    answer:0,
-    explanation:"The vocal folds are located within the larynx and vibrate as air passes through them during typical voiced phonation."
+    id: "ST001",
+    difficulty: "Easy",
+    topic: "Anatomy and Physiology",
+    question: "Which structure contains the vocal folds?",
+    options: ["Larynx", "Pharynx", "Hard palate", "Nasopharynx"],
+    answer: 0,
+    explanation: "The vocal folds are located within the larynx and vibrate as air passes through them during typical voiced phonation."
   },
   {
-    id:"ST002",difficulty:"Easy",topic:"Speech Sound Disorders",
-    question:"A child consistently says 'tat' for 'cat'. Which process best describes this example?",
-    options:["Gliding","Final consonant deletion","Fronting","Stopping"],
-    answer:2,
-    explanation:"Velar /k/ is replaced by the alveolar /t/. This is a place-of-articulation change commonly described as velar fronting."
+    id: "ST002",
+    difficulty: "Easy",
+    topic: "Speech Sound Disorders",
+    question: "A child consistently says 'tat' for 'cat'. Which process best describes this example?",
+    options: ["Gliding", "Final consonant deletion", "Fronting", "Stopping"],
+    answer: 2,
+    explanation: "Velar /k/ is replaced by the alveolar /t/. This is a place-of-articulation change commonly described as velar fronting."
   },
   {
-    id:"ST003",difficulty:"Easy",topic:"Language Development",
-    question:"Which skill is an example of receptive language?",
-    options:["Repeating a sentence aloud","Understanding a spoken instruction","Producing a story","Naming a pictured object"],
-    answer:1,
-    explanation:"Receptive language involves understanding spoken, written, or signed language. Following a spoken instruction is an example."
+    id: "ST003",
+    difficulty: "Easy",
+    topic: "Language Development",
+    question: "Which skill is an example of receptive language?",
+    options: ["Repeating a sentence aloud", "Understanding a spoken instruction", "Producing a story", "Naming a pictured object"],
+    answer: 1,
+    explanation: "Receptive language involves understanding spoken, written, or signed language. Following a spoken instruction is an example."
   },
   {
-    id:"ST004",difficulty:"Easy",topic:"Fluency Disorders",
-    question:"Which behaviour is most characteristic of stuttering?",
-    options:["Consistent hoarseness","Reduced hearing sensitivity","Difficulty chewing solids","Sound repetitions, prolongations, or blocks"],
-    answer:3,
-    explanation:"Stuttering can involve repetitions, prolongations, and blocks, sometimes accompanied by physical tension or avoidance."
+    id: "ST004",
+    difficulty: "Easy",
+    topic: "Fluency Disorders",
+    question: "Which behaviour is most characteristic of stuttering?",
+    options: ["Consistent hoarseness", "Reduced hearing sensitivity", "Difficulty chewing solids", "Sound repetitions, prolongations, or blocks"],
+    answer: 3,
+    explanation: "Stuttering can involve repetitions, prolongations, and blocks, sometimes accompanied by physical tension or avoidance."
   },
   {
-    id:"ST005",difficulty:"Easy",topic:"Voice Disorders",
-    question:"Which term refers to an unusually rough or breathy voice quality?",
-    options:["Dysphonia","Dysphagia","Dysarthria","Aphasia"],
-    answer:0,
-    explanation:"Dysphonia is a disorder or impairment of voice. Dysphagia concerns swallowing, dysarthria concerns motor speech, and aphasia concerns language."
+    id: "ST005",
+    difficulty: "Easy",
+    topic: "Voice Disorders",
+    question: "Which term refers to an unusually rough or breathy voice quality?",
+    options: ["Dysphonia", "Dysphagia", "Dysarthria", "Aphasia"],
+    answer: 0,
+    explanation: "Dysphonia is a disorder or impairment of voice. Dysphagia concerns swallowing, dysarthria concerns motor speech, and aphasia concerns language."
   },
   {
-    id:"ST006",difficulty:"Easy",topic:"Swallowing Disorders",
-    question:"Which term means difficulty swallowing?",
-    options:["Dysarthria","Dysphagia","Dysphonia","Dyslexia"],
-    answer:1,
-    explanation:"Dysphagia refers to difficulty with swallowing and may affect oral, pharyngeal, or oesophageal stages."
+    id: "ST006",
+    difficulty: "Easy",
+    topic: "Swallowing Disorders",
+    question: "Which term means difficulty swallowing?",
+    options: ["Dysarthria", "Dysphagia", "Dysphonia", "Dyslexia"],
+    answer: 1,
+    explanation: "Dysphagia refers to difficulty with swallowing and may affect oral, pharyngeal, or oesophageal stages."
   },
   {
-    id:"ST007",difficulty:"Easy",topic:"Neurogenic Communication Disorders",
-    question:"A person has impaired language comprehension and expression following a stroke. Which broad disorder should be considered?",
-    options:["A voice disorder","A resonance disorder","Aphasia","A fluency disorder"],
-    answer:2,
-    explanation:"Aphasia is an acquired language disorder commonly associated with brain injury such as stroke. Assessment is needed to establish the person's specific profile."
+    id: "ST007",
+    difficulty: "Easy",
+    topic: "Neurogenic Communication Disorders",
+    question: "A person has impaired language comprehension and expression following a stroke. Which broad disorder should be considered?",
+    options: ["A voice disorder", "A resonance disorder", "Aphasia", "A fluency disorder"],
+    answer: 2,
+    explanation: "Aphasia is an acquired language disorder commonly associated with brain injury such as stroke. Assessment is needed to establish the person's specific profile."
   },
   {
-    id:"ST008",difficulty:"Easy",topic:"Assessment",
-    question:"What is the primary purpose of obtaining a case history before a speech-language assessment?",
-    options:["To replace direct assessment","To determine a diagnosis without testing","To avoid speaking with the client","To gather relevant developmental, medical, and communication information"],
-    answer:3,
-    explanation:"A case history helps the clinician understand the presenting concerns, development, medical background, languages, and everyday communication needs."
+    id: "ST008",
+    difficulty: "Easy",
+    topic: "Assessment",
+    question: "What is the primary purpose of obtaining a case history before a speech-language assessment?",
+    options: ["To replace direct assessment", "To determine a diagnosis without testing", "To avoid speaking with the client", "To gather relevant developmental, medical, and communication information"],
+    answer: 3,
+    explanation: "A case history helps the clinician understand the presenting concerns, development, medical background, languages, and everyday communication needs."
   },
   {
-    id:"ST009",difficulty:"Easy",topic:"Augmentative and Alternative Communication",
-    question:"What does AAC stand for?",
-    options:["Augmentative and Alternative Communication","Auditory Assessment Criteria","Articulation and Accent Correction","Automatic Acoustic Calibration"],
-    answer:0,
-    explanation:"AAC refers to augmentative and alternative communication methods that supplement or replace speech when needed."
+    id: "ST009",
+    difficulty: "Easy",
+    topic: "Augmentative and Alternative Communication",
+    question: "What does AAC stand for?",
+    options: ["Augmentative and Alternative Communication", "Auditory Assessment Criteria", "Articulation and Accent Correction", "Automatic Acoustic Calibration"],
+    answer: 0,
+    explanation: "AAC refers to augmentative and alternative communication methods that supplement or replace speech when needed."
   },
   {
-    id:"ST010",difficulty:"Easy",topic:"Hearing and Communication",
-    question:"Why is hearing status relevant when assessing a child with delayed speech and language?",
-    options:["Hearing determines intelligence","Reduced access to sound may affect speech and language development","A hearing test directly diagnoses autism","Hearing has no relationship to language learning"],
-    answer:1,
-    explanation:"Hearing difficulties can reduce access to speech sounds and spoken language. Hearing assessment is one part of a broader evaluation when indicated."
+    id: "ST010",
+    difficulty: "Easy",
+    topic: "Hearing and Communication",
+    question: "Why is hearing status relevant when assessing a child with delayed speech and language?",
+    options: ["Hearing determines intelligence", "Reduced access to sound may affect speech and language development", "A hearing test directly diagnoses autism", "Hearing has no relationship to language learning"],
+    answer: 1,
+    explanation: "Hearing difficulties can reduce access to speech sounds and spoken language. Hearing assessment is one part of a broader evaluation when indicated."
   },
   {
-    id:"ST011",difficulty:"Moderate",topic:"Speech Sound Disorders",
-    question:"A child produces /w/ instead of /r/ in words. Which phonological pattern best fits this substitution?",
-    options:["Backing","Final consonant deletion","Gliding","Weak-syllable deletion"],
-    answer:2,
-    explanation:"Gliding occurs when a liquid consonant, such as /r/ or /l/, is replaced by a glide such as /w/ or /j/. Interpretation depends on the child's age, language, and speech system."
+    id: "ST011",
+    difficulty: "Moderate",
+    topic: "Speech Sound Disorders",
+    question: "A child produces /w/ instead of /r/ in words. Which phonological pattern best fits this substitution?",
+    options: ["Backing", "Final consonant deletion", "Gliding", "Weak-syllable deletion"],
+    answer: 2,
+    explanation: "Gliding occurs when a liquid consonant, such as /r/ or /l/, is replaced by a glide such as /w/ or /j/. Interpretation depends on the child's age, language, and speech system."
   },
   {
-    id:"ST012",difficulty:"Moderate",topic:"Language Development",
-    question:"A child uses short, telegraphic utterances and has difficulty combining words despite adequate opportunities to communicate. What is the most appropriate next step?",
-    options:["Immediately diagnose an intellectual disability","Assume the child will outgrow the difficulty","Begin voice therapy without assessment","Conduct a comprehensive language assessment with developmental and contextual information"],
-    answer:3,
-    explanation:"A comprehensive assessment should examine receptive and expressive language, developmental history, functional communication, and relevant contextual factors before planning intervention."
+    id: "ST012",
+    difficulty: "Moderate",
+    topic: "Language Development",
+    question: "A child uses short, telegraphic utterances and has difficulty combining words despite adequate opportunities to communicate. What is the most appropriate next step?",
+    options: ["Immediately diagnose an intellectual disability", "Assume the child will outgrow the difficulty", "Begin voice therapy without assessment", "Conduct a comprehensive language assessment with developmental and contextual information"],
+    answer: 3,
+    explanation: "A comprehensive assessment should examine receptive and expressive language, developmental history, functional communication, and relevant contextual factors before planning intervention."
   },
   {
-    id:"ST013",difficulty:"Moderate",topic:"Neurogenic Communication Disorders",
-    question:"A person speaks fluently but has poor comprehension and produces semantically unrelated words after a stroke. Which aphasia profile is most suggestive?",
-    options:["Wernicke-type aphasia","Broca-type aphasia","Pure dysarthria","Isolated apraxia of speech"],
-    answer:0,
-    explanation:"Wernicke-type aphasia is classically associated with fluent speech, impaired auditory comprehension, and reduced meaningful content. Actual presentations vary and require comprehensive assessment."
+    id: "ST013",
+    difficulty: "Moderate",
+    topic: "Neurogenic Communication Disorders",
+    question: "A person speaks fluently but has poor comprehension and produces semantically unrelated words after a stroke. Which aphasia profile is most suggestive?",
+    options: ["Wernicke-type aphasia", "Broca-type aphasia", "Pure dysarthria", "Isolated apraxia of speech"],
+    answer: 0,
+    explanation: "Wernicke-type aphasia is classically associated with fluent speech, impaired auditory comprehension, and reduced meaningful content. Actual presentations vary and require comprehensive assessment."
   },
   {
-    id:"ST014",difficulty:"Moderate",topic:"Motor Speech Disorders",
-    question:"Which finding most strongly supports dysarthria rather than aphasia?",
-    options:["Impaired naming and sentence comprehension","Imprecise articulation associated with impaired speech-motor control","Difficulty understanding word meanings","Agrammatic language formulation"],
-    answer:1,
-    explanation:"Dysarthria is a motor speech disorder caused by impaired neuromuscular control of speech. Aphasia primarily affects language processing."
+    id: "ST014",
+    difficulty: "Moderate",
+    topic: "Motor Speech Disorders",
+    question: "Which finding most strongly supports dysarthria rather than aphasia?",
+    options: ["Impaired naming and sentence comprehension", "Imprecise articulation associated with impaired speech-motor control", "Difficulty understanding word meanings", "Agrammatic language formulation"],
+    answer: 1,
+    explanation: "Dysarthria is a motor speech disorder caused by impaired neuromuscular control of speech. Aphasia primarily affects language processing."
   },
   {
-    id:"ST015",difficulty:"Moderate",topic:"Motor Speech Disorders",
-    question:"A patient makes inconsistent articulatory errors, struggles to sequence speech movements, and shows disrupted transitions between sounds. Which disorder should be investigated?",
-    options:["Conductive hearing loss","Isolated dysphonia","Apraxia of speech","Oesophageal dysphagia"],
-    answer:2,
-    explanation:"Apraxia of speech is a motor-planning/programming disorder. Inconsistent errors and disrupted transitions can support this hypothesis, but differential diagnosis requires a full motor-speech assessment."
+    id: "ST015",
+    difficulty: "Moderate",
+    topic: "Motor Speech Disorders",
+    question: "A patient makes inconsistent articulatory errors, struggles to sequence speech movements, and shows disrupted transitions between sounds. Which disorder should be investigated?",
+    options: ["Conductive hearing loss", "Isolated dysphonia", "Apraxia of speech", "Oesophageal dysphagia"],
+    answer: 2,
+    explanation: "Apraxia of speech is a motor-planning/programming disorder. Inconsistent errors and disrupted transitions can support this hypothesis, but differential diagnosis requires a full motor-speech assessment."
   },
   {
-    id:"ST016",difficulty:"Moderate",topic:"Voice Disorders",
-    question:"A teacher reports persistent hoarseness after weeks of heavy voice use. What is the most appropriate recommendation?",
-    options:["Start forceful vocal exercises without assessment","Whisper throughout the working day","Ignore the symptoms if there is no pain","Arrange appropriate medical or laryngeal evaluation and provide safe interim voice-use advice"],
-    answer:3,
-    explanation:"Persistent dysphonia warrants appropriate evaluation, especially when it does not resolve. Management should be guided by the cause; avoid prescribing intensive voice therapy before suitable assessment."
+    id: "ST016",
+    difficulty: "Moderate",
+    topic: "Voice Disorders",
+    question: "A teacher reports persistent hoarseness after weeks of heavy voice use. What is the most appropriate recommendation?",
+    options: ["Start forceful vocal exercises without assessment", "Whisper throughout the working day", "Ignore the symptoms if there is no pain", "Arrange appropriate medical or laryngeal evaluation and provide safe interim voice-use advice"],
+    answer: 3,
+    explanation: "Persistent dysphonia warrants appropriate evaluation, especially when it does not resolve. Management should be guided by the cause; avoid prescribing intensive voice therapy before suitable assessment."
   },
   {
-    id:"ST017",difficulty:"Moderate",topic:"Swallowing Disorders",
-    question:"During a meal, a patient develops repeated coughing and a wet-sounding voice after swallowing. What should the clinician do?",
-    options:["Treat these as possible signs of swallowing difficulty and arrange appropriate assessment","Assume aspiration is confirmed without further assessment","Recommend unrestricted thin liquids for every patient","Ignore the symptoms if the patient finishes the meal"],
-    answer:0,
-    explanation:"Coughing and wet voice can be warning signs of swallowing difficulty but do not independently confirm aspiration. Follow appropriate clinical protocols and refer for swallowing assessment as indicated."
+    id: "ST017",
+    difficulty: "Moderate",
+    topic: "Swallowing Disorders",
+    question: "During a meal, a patient develops repeated coughing and a wet-sounding voice after swallowing. What should the clinician do?",
+    options: ["Treat these as possible signs of swallowing difficulty and arrange appropriate assessment", "Assume aspiration is confirmed without further assessment", "Recommend unrestricted thin liquids for every patient", "Ignore the symptoms if the patient finishes the meal"],
+    answer: 0,
+    explanation: "Coughing and wet voice can be warning signs of swallowing difficulty but do not independently confirm aspiration. Follow appropriate clinical protocols and refer for swallowing assessment as indicated."
   },
   {
-    id:"ST018",difficulty:"Moderate",topic:"Assessment",
-    question:"Why should assessment materials and interpretation account for a client's language and cultural background?",
-    options:["To ensure every client receives identical test items regardless of language","To reduce the risk of confusing language difference with disorder","To avoid obtaining a case history","To remove the need for clinical judgement"],
-    answer:1,
-    explanation:"Language and cultural differences can affect test performance. Clinicians should use appropriate tools, interpreters or language resources when needed, and interpret findings within the person's linguistic context."
+    id: "ST018",
+    difficulty: "Moderate",
+    topic: "Assessment",
+    question: "Why should assessment materials and interpretation account for a client's language and cultural background?",
+    options: ["To ensure every client receives identical test items regardless of language", "To reduce the risk of confusing language difference with disorder", "To avoid obtaining a case history", "To remove the need for clinical judgement"],
+    answer: 1,
+    explanation: "Language and cultural differences can affect test performance. Clinicians should use appropriate tools, interpreters or language resources when needed, and interpret findings within the person's linguistic context."
   },
   {
-    id:"ST019",difficulty:"Moderate",topic:"Augmentative and Alternative Communication",
-    question:"A nonspeaking child has reliable pointing and intentional communication. What is an appropriate AAC principle?",
-    options:["Delay AAC until speech therapy has failed","Use only a high-tech device in all settings","Select a system based on the child's access, communication needs, partners, and environments","Require perfect symbol recognition before introducing AAC"],
-    answer:2,
-    explanation:"AAC should be individualised and support functional communication. Aided and unaided options, access methods, communication partners, and everyday environments should all be considered."
+    id: "ST019",
+    difficulty: "Moderate",
+    topic: "Augmentative and Alternative Communication",
+    question: "A nonspeaking child has reliable pointing and intentional communication. What is an appropriate AAC principle?",
+    options: ["Delay AAC until speech therapy has failed", "Use only a high-tech device in all settings", "Select a system based on the child's access, communication needs, partners, and environments", "Require perfect symbol recognition before introducing AAC"],
+    answer: 2,
+    explanation: "AAC should be individualised and support functional communication. Aided and unaided options, access methods, communication partners, and everyday environments should all be considered."
   },
   {
-    id:"ST020",difficulty:"Moderate",topic:"Fluency Disorders",
-    question:"A school-age child who stutters begins avoiding classroom speaking. Which clinical priority is especially important?",
-    options:["Focus exclusively on eliminating every disfluency","Tell the child to slow down whenever speaking","Avoid discussing the child's concerns","Assess communication impact, feelings, avoidance, and participation as well as speech behaviours"],
-    answer:3,
-    explanation:"A comprehensive fluency assessment considers observable speech, the child's experience, emotional responses, avoidance, and effects on participation. Intervention goals should be individualised."
+    id: "ST020",
+    difficulty: "Moderate",
+    topic: "Fluency Disorders",
+    question: "A school-age child who stutters begins avoiding classroom speaking. Which clinical priority is especially important?",
+    options: ["Focus exclusively on eliminating every disfluency", "Tell the child to slow down whenever speaking", "Avoid discussing the child's concerns", "Assess communication impact, feelings, avoidance, and participation as well as speech behaviours"],
+    answer: 3,
+    explanation: "A comprehensive fluency assessment considers observable speech, the child's experience, emotional responses, avoidance, and effects on participation. Intervention goals should be individualised."
   },
   {
-    id:"ST021",difficulty:"Hard",topic:"Neurogenic Communication Disorders",
-    question:"A patient with aphasia performs poorly on confrontation naming. Which additional assessment strategy best helps determine whether the difficulty is limited to word retrieval?",
-    options:["Compare naming with comprehension, repetition, semantic knowledge, and functional communication tasks","Use naming performance alone to determine the entire language profile","Assume every naming error reflects impaired visual recognition","Assess voice quality only"],
-    answer:0,
-    explanation:"Naming performance can be affected by several language and cognitive processes. Comparing multiple task types helps establish a more complete profile and informs differential interpretation."
+    id: "ST021",
+    difficulty: "Hard",
+    topic: "Neurogenic Communication Disorders",
+    question: "A patient with aphasia performs poorly on confrontation naming. Which additional assessment strategy best helps determine whether the difficulty is limited to word retrieval?",
+    options: ["Compare naming with comprehension, repetition, semantic knowledge, and functional communication tasks", "Use naming performance alone to determine the entire language profile", "Assume every naming error reflects impaired visual recognition", "Assess voice quality only"],
+    answer: 0,
+    explanation: "Naming performance can be affected by several language and cognitive processes. Comparing multiple task types helps establish a more complete profile and informs differential interpretation."
   },
   {
-    id:"ST022",difficulty:"Hard",topic:"Motor Speech Disorders",
-    question:"Which combination is most useful when differentiating apraxia of speech from dysarthria?",
-    options:["Only the patient's age and occupation","Error consistency, prosody, transitions, strength and coordination findings, and performance across speech tasks","Only a single sustained vowel","Only a reading-comprehension score"],
-    answer:1,
-    explanation:"Differentiation relies on a pattern of findings. Apraxia primarily concerns speech motor planning/programming, whereas dysarthria involves impaired motor execution/control; mixed presentations can occur."
+    id: "ST022",
+    difficulty: "Hard",
+    topic: "Motor Speech Disorders",
+    question: "Which combination is most useful when differentiating apraxia of speech from dysarthria?",
+    options: ["Only the patient's age and occupation", "Error consistency, prosody, transitions, strength and coordination findings, and performance across speech tasks", "Only a single sustained vowel", "Only a reading-comprehension score"],
+    answer: 1,
+    explanation: "Differentiation relies on a pattern of findings. Apraxia primarily concerns speech motor planning/programming, whereas dysarthria involves impaired motor execution/control; mixed presentations can occur."
   },
   {
-    id:"ST023",difficulty:"Hard",topic:"Swallowing Disorders",
-    question:"A patient has suspected pharyngeal dysphagia, but the bedside examination does not establish the physiology of swallowing. What is the best next consideration?",
-    options:["Prescribe thickened fluids automatically for every meal","Conclude that swallowing is normal if no cough occurs","Consider an appropriate instrumental examination, such as VFSS or FEES, when clinically indicated","Use a speech articulation test to confirm aspiration"],
-    answer:2,
-    explanation:"Instrumental assessment may be needed to visualise swallowing physiology and guide management. The choice of VFSS or FEES depends on the clinical question, patient factors, and local protocols."
+    id: "ST023",
+    difficulty: "Hard",
+    topic: "Swallowing Disorders",
+    question: "A patient has suspected pharyngeal dysphagia, but the bedside examination does not establish the physiology of swallowing. What is the best next consideration?",
+    options: ["Prescribe thickened fluids automatically for every meal", "Conclude that swallowing is normal if no cough occurs", "Consider an appropriate instrumental examination, such as VFSS or FEES, when clinically indicated", "Use a speech articulation test to confirm aspiration"],
+    answer: 2,
+    explanation: "Instrumental assessment may be needed to visualise swallowing physiology and guide management. The choice of VFSS or FEES depends on the clinical question, patient factors, and local protocols."
   },
   {
-    id:"ST024",difficulty:"Hard",topic:"Assessment",
-    question:"A standardised language test score conflicts with caregiver reports and observations of everyday communication. What is the strongest clinical approach?",
-    options:["Discard all caregiver information","Use only the single highest score","Diagnose from the standard score alone","Integrate standardised results with history, observation, language sampling, functional reports, and other relevant evidence"],
-    answer:3,
-    explanation:"Clinical decisions should integrate multiple sources of evidence. Differences between test performance and daily communication should be explored rather than ignored."
+    id: "ST024",
+    difficulty: "Hard",
+    topic: "Assessment",
+    question: "A standardised language test score conflicts with caregiver reports and observations of everyday communication. What is the strongest clinical approach?",
+    options: ["Discard all caregiver information", "Use only the single highest score", "Diagnose from the standard score alone", "Integrate standardised results with history, observation, language sampling, functional reports, and other relevant evidence"],
+    answer: 3,
+    explanation: "Clinical decisions should integrate multiple sources of evidence. Differences between test performance and daily communication should be explored rather than ignored."
   },
   {
-    id:"ST025",difficulty:"Hard",topic:"Augmentative and Alternative Communication",
-    question:"A client with severe motor impairment understands language well but cannot reliably touch small symbols on a tablet. What should guide AAC access planning?",
-    options:["Assess alternative access methods such as partner-assisted scanning, switches, or eye gaze as appropriate","Conclude that AAC is unsuitable because direct touch is unreliable","Reduce vocabulary to two choices permanently without further assessment","Require independent handwriting before AAC can be used"],
-    answer:0,
-    explanation:"AAC access should match motor, sensory, language, and environmental needs. Alternative access methods can improve communication opportunities and should be evaluated individually."
+    id: "ST025",
+    difficulty: "Hard",
+    topic: "Augmentative and Alternative Communication",
+    question: "A client with severe motor impairment understands language well but cannot reliably touch small symbols on a tablet. What should guide AAC access planning?",
+    options: ["Assess alternative access methods such as partner-assisted scanning, switches, or eye gaze as appropriate", "Conclude that AAC is unsuitable because direct touch is unreliable", "Reduce vocabulary to two choices permanently without further assessment", "Require independent handwriting before AAC can be used"],
+    answer: 0,
+    explanation: "AAC access should match motor, sensory, language, and environmental needs. Alternative access methods can improve communication opportunities and should be evaluated individually."
   },
   {
-    id:"ST026",difficulty:"Hard",topic:"Voice Disorders",
-    question:"A patient with suspected muscle tension dysphonia has persistent voice symptoms. Which approach best supports evidence-informed care?",
-    options:["Prescribe the same exercise programme to all patients with hoarseness","Ensure appropriate differential assessment and use findings to guide individualised management","Assume a normal speaking volume rules out a voice disorder","Recommend prolonged complete silence without clinical assessment"],
-    answer:1,
-    explanation:"Voice symptoms can have different causes. Appropriate evaluation helps guide safe, individualised treatment and determine whether medical or laryngeal review is required."
+    id: "ST026",
+    difficulty: "Hard",
+    topic: "Voice Disorders",
+    question: "A patient with suspected muscle tension dysphonia has persistent voice symptoms. Which approach best supports evidence-informed care?",
+    options: ["Prescribe the same exercise programme to all patients with hoarseness", "Ensure appropriate differential assessment and use findings to guide individualised management", "Assume a normal speaking volume rules out a voice disorder", "Recommend prolonged complete silence without clinical assessment"],
+    answer: 1,
+    explanation: "Voice symptoms can have different causes. Appropriate evaluation helps guide safe, individualised treatment and determine whether medical or laryngeal review is required."
   },
   {
-    id:"ST027",difficulty:"Easy",topic:"Anatomy and Physiology",
-    question:"Which structure separates the oral cavity from the nasal cavity during much of typical speech production?",
-    options:["Epiglottis alone","Vocal folds","The palate, including the hard and soft palate","The trachea"],
-    answer:2,
-    explanation:"The palate forms the roof of the oral cavity and floor of the nasal cavity. The soft palate contributes to velopharyngeal closure during many oral speech sounds."
+    id: "ST027",
+    difficulty: "Easy",
+    topic: "Anatomy and Physiology",
+    question: "Which structure separates the oral cavity from the nasal cavity during much of typical speech production?",
+    options: ["Epiglottis alone", "Vocal folds", "The palate, including the hard and soft palate", "The trachea"],
+    answer: 2,
+    explanation: "The palate forms the roof of the oral cavity and floor of the nasal cavity. The soft palate contributes to velopharyngeal closure during many oral speech sounds."
   },
   {
-    id:"ST028",difficulty:"Moderate",topic:"Hearing and Communication",
-    question:"A child responds inconsistently to spoken directions in a noisy classroom. What is the most appropriate interpretation?",
-    options:["This proves the child has ADHD","This proves the child has a language disorder","This proves the child is deliberately not listening","Several factors may contribute, so gather history and assess hearing, language, attention, and listening context as indicated"],
-    answer:3,
-    explanation:"Inconsistent responses in noise are not specific to one diagnosis. Assessment should consider the listening environment and relevant hearing, language, attention, and developmental factors."
+    id: "ST028",
+    difficulty: "Moderate",
+    topic: "Hearing and Communication",
+    question: "A child responds inconsistently to spoken directions in a noisy classroom. What is the most appropriate interpretation?",
+    options: ["This proves the child has ADHD", "This proves the child has a language disorder", "This proves the child is deliberately not listening", "Several factors may contribute, so gather history and assess hearing, language, attention, and listening context as indicated"],
+    answer: 3,
+    explanation: "Inconsistent responses in noise are not specific to one diagnosis. Assessment should consider the listening environment and relevant hearing, language, attention, and developmental factors."
   },
   {
-    id:"ST029",difficulty:"Moderate",topic:"Speech Sound Disorders",
-    question:"When assessing a multilingual child who has speech sound differences, what is the best practice?",
-    options:["Consider the child's languages, dialects, exposure, and speech patterns before identifying a disorder","Compare performance only with monolingual norms for a different language","Assume differences across languages always indicate impairment","Assess only the language spoken least often"],
-    answer:0,
-    explanation:"Speech development must be interpreted in relation to the child's linguistic experience. Differences expected from language or dialect should not automatically be labelled as disorders."
+    id: "ST029",
+    difficulty: "Moderate",
+    topic: "Speech Sound Disorders",
+    question: "When assessing a multilingual child who has speech sound differences, what is the best practice?",
+    options: ["Consider the child's languages, dialects, exposure, and speech patterns before identifying a disorder", "Compare performance only with monolingual norms for a different language", "Assume differences across languages always indicate impairment", "Assess only the language spoken least often"],
+    answer: 0,
+    explanation: "Speech development must be interpreted in relation to the child's linguistic experience. Differences expected from language or dialect should not automatically be labelled as disorders."
   },
   {
-    id:"ST030",difficulty:"Hard",topic:"Language Development",
-    question:"A bilingual child performs differently across the two languages. Which evidence is most informative when evaluating possible developmental language disorder?",
-    options:["A single vocabulary score in the less-exposed language","Developmental history and language abilities across both languages, interpreted with appropriate tools and exposure information","The fact that the child mixes languages","The assumption that bilingualism causes language disorder"],
-    answer:1,
-    explanation:"Evaluation of bilingual children should account for language exposure and use, assess abilities across languages where possible, and draw on multiple sources of evidence. Bilingualism itself does not cause a language disorder."
+    id: "ST030",
+    difficulty: "Hard",
+    topic: "Language Development",
+    question: "A bilingual child performs differently across the two languages. Which evidence is most informative when evaluating possible developmental language disorder?",
+    options: ["A single vocabulary score in the less-exposed language", "Developmental history and language abilities across both languages, interpreted with appropriate tools and exposure information", "The fact that the child mixes languages", "The assumption that bilingualism causes language disorder"],
+    answer: 1,
+    explanation: "Evaluation of bilingual children should account for language exposure and use, assess abilities across languages where possible, and draw on multiple sources of evidence. Bilingualism itself does not cause a language disorder."
   },
-     // ===== EASY: ST031–ST050 =====
+  // ===== EASY: ST031–ST050 =====
   {
     id: "ST031",
     difficulty: "Easy",
     topic: "Anatomy and Physiology",
     question: "Which structure primarily carries air from the larynx toward the lungs?",
-    options: [
-      "Oesophagus",
-      "Trachea",
-      "Hard palate",
-      "Tongue"
-    ],
+    options: ["Oesophagus", "Trachea", "Hard palate", "Tongue"],
     answer: 1,
     explanation: "The trachea carries air from the larynx toward the bronchi. The oesophagus carries food and liquid toward the stomach."
   },
   {
-    id:"ST032",difficulty:"Easy",topic:"Anatomy and Physiology",
-    question:"Which articulator is most directly involved in producing bilabial sounds such as /p/ and /b/?",
-    options:["Tongue tip and alveolar ridge","Lower lip and upper teeth","Both lips","Tongue dorsum and soft palate"],
-    answer:2,
-    explanation:"Bilabial sounds are produced using both lips. Examples include /p/, /b/, and /m/ in English."
-  },
+    id: "ST032",
+    difficulty: "Easy",
+    topic: "Anatomy and Physiology",
+    question: "Which articulator is most directly involved in producing bilabial sounds such as /p/ and /b/?",
+    options: ["Tongue tip and alveolar ridge", "Lower lip and upper teeth", "Both lips", "Tongue dorsum and soft palate"],
+    answer: 2,
+    explanation: "Bilabial sounds are produced using both lips. Examples include /p/, /b/, and /m/ in English."
+  }
+];
   {
     id:"ST033",difficulty:"Easy",topic:"Language Development",
     question:"Which behaviour is an example of expressive language?",
