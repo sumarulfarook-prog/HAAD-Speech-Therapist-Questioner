@@ -135,8 +135,59 @@ if(/speech|articul|fluency|stutter|motor speech|dysarthria|phonolog|cleft palate
 return TOPIC_GROUPS[4];}
 $("topic").innerHTML='<option value="All">All five topics</option>'+TOPIC_GROUPS.map(t=>'<option value="'+safe(t)+'">'+safe(t)+'</option>').join("");
 function applyUsername(value){const name=String(value||"").trim().slice(0,24)||"Learner";$("heroUserName").textContent=name;$("catNameHome").textContent=name;$("catNameQuiz").textContent=name;$("quizWelcomeName").textContent=name;document.title=name==="Learner"?"Speech Therapist Exam Practice":name+" | Speech Therapist Exam Practice";try{localStorage.setItem("stExamUsername",name==="Learner"?"":name);}catch(e){}}
-function animateCharacters(correct){const artPath=correct?"assets/cat-mouse-hug-3d.png":"assets/cat-mouse-bonk-3d.png";["homeCharacterStage","quizCharacterStage"].forEach(id=>{const stage=$(id);if(!stage)return;const art=stage.querySelector(".character-art");if(art){art.src=artPath;art.alt=correct?"The 3D cat and mouse hugging after a correct answer":"The 3D mouse playfully bonking the cat after an incorrect answer";}stage.classList.remove("hug","bonk");stage.classList.add("character-stage");void stage.offsetWidth;stage.classList.remove("idle");stage.classList.add(correct?"hug":"bonk");const speech=stage.querySelector(".stage-speech");if(speech)speech.textContent=correct?"Great job! 💖":"Oops! Bonk! 💫";});$("quizStageMessage").textContent=correct?"Correct answer — hug time!":"A funny bonk. Learn and try again!";window.setTimeout(()=>{["homeCharacterStage","quizCharacterStage"].forEach(id=>{const stage=$(id);if(!stage)return;const art=stage.querySelector(".character-art");if(art){art.src="assets/cat-mouse-hug-3d.png";art.alt="A 3D cartoon cat and mouse hugging";}stage.classList.remove("hug","bonk");stage.classList.add("idle");});["homeSpeech","quizSpeech"].forEach(id=>{if($(id))$(id).textContent="Let's do this! ✨";});$("quizStageMessage").textContent="Ready for the next question?";},1450);}
-try{const savedName=localStorage.getItem("stExamUsername")||"";$("userName").value=savedName;applyUsername(savedName);}catch(e){applyUsername("");}
+
+function animateCharacters(correct) {
+  ["homeCharacterStage", "quizCharacterStage"].forEach(id => {
+    const stage = $(id);
+    if (!stage) return;
+
+    stage.classList.remove("hug", "bonk", "idle");
+    stage.classList.add("character-stage");
+    void stage.offsetWidth;
+    stage.classList.add(correct ? "hug" : "bonk");
+
+    const speech = stage.querySelector(".stage-speech");
+    if (speech) {
+      speech.textContent = correct
+        ? "Great job! 💖"
+        : "Oops! Bonk! 💫";
+    }
+
+    // Notify the separate 3D animation module.
+    window.dispatchEvent(new CustomEvent("characters-3d-action", {
+      detail: {
+        stageId: id,
+        action: correct ? "hug" : "bonk"
+      }
+    }));
+  });
+
+  $("quizStageMessage").textContent = correct
+    ? "Correct answer — hug time!"
+    : "A funny bonk. Learn and try again!";
+
+  window.setTimeout(() => {
+    ["homeCharacterStage", "quizCharacterStage"].forEach(id => {
+      const stage = $(id);
+      if (!stage) return;
+
+      stage.classList.remove("hug", "bonk");
+      stage.classList.add("idle");
+
+      window.dispatchEvent(new CustomEvent("characters-3d-action", {
+        detail: { stageId: id, action: "idle" }
+      }));
+    });
+
+    ["homeSpeech", "quizSpeech"].forEach(id => {
+      if ($(id)) $(id).textContent = "Let's do this! ✨";
+    });
+
+    $("quizStageMessage").textContent =
+      "Ready for the next question?";
+  }, 1450);
+}
+
 $("userName").addEventListener("input",e=>applyUsername(e.target.value));$("userName").addEventListener("change",e=>applyUsername(e.target.value));
 function getPool(){
 let pool=bank.filter(q=>( $("difficulty").value==="All"||q.difficulty===$("difficulty").value)&&( $("topic").value==="All"||groupedTopic(q.topic)===$("topic").value));
