@@ -1988,7 +1988,7 @@ const QUESTION_BANK = [
   options:["Discharge solely on the basis of the naming score","Repeat the same test indefinitely without further inquiry","Assess real-world communication, participation barriers, and personally meaningful goals","Conclude that the patient's reported difficulty is irrelevant"],
   answer:2,
   explanation:"Structured test performance may not reflect everyday communication. Functional assessment and patient-centered goals help identify barriers and guide intervention."
-}
+},
 
 {
   id:"ST271",difficulty:"Easy",topic:"Anatomy",
