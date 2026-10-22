@@ -1989,7 +1989,6 @@ const QUESTION_BANK = [
   answer:2,
   explanation:"Structured test performance may not reflect everyday communication. Functional assessment and patient-centered goals help identify barriers and guide intervention."
 },
-
 {
   id:"ST271",difficulty:"Easy",topic:"Anatomy",
   question:"Which muscle group is primarily responsible for moving the tongue?",
@@ -2271,7 +2270,6 @@ const QUESTION_BANK = [
   answer:2,
   explanation:"Communication assessment should recognize spoken language, AAC, gestures, and other meaningful forms while considering communicative function and context."
 },
-
 {
   id:"ST311",difficulty:"Hard",topic:"Differential Diagnosis",
   question:"A child has inconsistent consonant and vowel errors, disrupted transitions, and atypical lexical stress. What is the most appropriate next step?",
@@ -2833,7 +2831,6 @@ const QUESTION_BANK = [
   answer:2,
   explanation:"Evidence-based practice integrates the best available research with clinical expertise and the individual's values, preferences, and circumstances."
 },
-
 {
   id:"ST391",difficulty:"Easy",topic:"Anatomy",
   question:"Which muscle is primarily responsible for protruding the tongue?",
@@ -3254,7 +3251,6 @@ const QUESTION_BANK = [
   answer:0,
   explanation:"Sound clinical reasoning integrates multiple sources of evidence and considers measurement limits, context, and functional communication."
 },
-
 {
   id:"ST451",difficulty:"Easy",topic:"Speech Anatomy",
   question:"Which structure elevates the soft palate during normal swallowing?",
@@ -4096,7 +4092,6 @@ const QUESTION_BANK = [
   answer:0,
   explanation:"Structured accuracy does not guarantee functional generalization. Treatment should address everyday communication goals and monitor real-world outcomes."
 },
-
 {
   id:"ST571",difficulty:"Easy",topic:"Anatomy",
   question:"Which structure separates the oral cavity from the nasal cavity?",
@@ -4237,7 +4232,6 @@ const QUESTION_BANK = [
   answer:3,
   explanation:"Quantifiable observations are more objective than judgments about motivation."
 },
-
 {
   id:"ST591",difficulty:"Moderate",topic:"Assessment",
   question:"A child performs well on single-word naming but struggles to explain events in conversation. What should assessment examine next?",
@@ -4378,7 +4372,6 @@ const QUESTION_BANK = [
   answer:0,
   explanation:"Record disclosure must follow applicable privacy laws, professional rules, and authorization requirements."
 },
-
 {
   id:"ST611",difficulty:"Hard",topic:"Dysphagia",
   question:"During VFSS, a patient demonstrates material passing below the vocal folds without an immediate cough. How should this finding be classified?",
@@ -4519,7 +4512,6 @@ const QUESTION_BANK = [
   answer:0,
   explanation:"Generalization can be supported by varied practice, contextual progression, and monitoring performance in spontaneous communication."
 },
-
 {
   id:"ST631",difficulty:"Easy",topic:"Anatomy",
   question:"Which articulator is most involved in producing /t/?",
@@ -5257,7 +5249,6 @@ const QUESTION_BANK = [
   answer:1,
   explanation:"Treatment decisions should integrate impairment-level results with meaningful participation, client goals, and contextual factors."
 },
-
 {
   id:"ST736",difficulty:"Easy",topic:"Anatomy",
   question:"Which structure elevates to help close the velopharyngeal port during oral speech?",
@@ -5503,7 +5494,6 @@ const QUESTION_BANK = [
   answer:0,
   explanation:"Aspiration occurs when material enters the airway below the vocal folds."
 },
-
 {
   id:"ST771",difficulty:"Moderate",topic:"Language Assessment",
   question:"A child follows familiar routine instructions but struggles with novel instructions containing multiple clauses. What should be assessed?",
@@ -5749,7 +5739,6 @@ const QUESTION_BANK = [
   answer:3,
   explanation:"Inferencing involves using available information to derive a meaning that is not explicitly stated."
 },
-
 {
   id:"ST806",difficulty:"Hard",topic:"Dysphagia",
   question:"A VFSS shows substantial pharyngeal residue after swallowing, with no aspiration on the initial swallow. Why does residue still matter?",
