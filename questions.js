@@ -2409,8 +2409,7 @@ const QUESTION_BANK = [
   options:["Discharge solely because the structured score improved","Assume work communication is unrelated to speech therapy","Examine workplace communication demands and develop relevant functional goals with the patient","Repeat the identical task without discussing daily needs"],
   answer:2,
   explanation:"Improvement on structured tasks may not generalize to the workplace. Functional assessment and patient-centered planning help target real-world communication barriers."
-}
-
+},
 {
   id:"ST331",difficulty:"Easy",topic:"Anatomy",
   question:"Which structure separates the oral cavity from the nasal cavity?",
