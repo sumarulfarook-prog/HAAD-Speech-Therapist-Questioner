@@ -1142,7 +1142,7 @@ const QUESTION_BANK = [
     options:["Present untested abilities as confirmed findings","Clearly document the assessment limits, distinguish observations from conclusions, and recommend further evaluation where appropriate","Copy another client's report","Omit the limitations to make the report appear complete"],
     answer:1,
     explanation:"Reports should accurately represent the evidence collected, identify limitations, avoid unsupported conclusions, and specify further assessment needs where appropriate."
-  }
+  },
 
 {
   id:"ST151", difficulty:"Easy", topic:"Anatomy",
